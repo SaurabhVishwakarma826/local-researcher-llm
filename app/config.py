@@ -1,0 +1,28 @@
+# app/config.py — every tunable lives here. Measured values noted with source.
+
+OLLAMA_HOST = "http://localhost:11434"
+LLM_MODEL = "qwen2.5:3b"
+
+# Measured: 03_threads.py — 12 best prefill (66 tok/s), decode flat 10-12
+NUM_THREAD = 12
+
+# Measured: 04_numctx.py — 16384 prefills as fast as 4096 (within noise).
+# Changing num_ctx between requests forces a ~3s model reload. Never vary it.
+# KV cache at 16384: ~590 MB on top of 1.93 GB weights.
+NUM_CTX = 16384
+
+KEEP_ALIVE = "10m"
+DEFAULT_TEMPERATURE = 0.0
+DEFAULT_SEED = 42
+
+# Health check: normal prefill on this machine is ~60-70 tok/s.
+# If logged prefill drops below ~40, restart the Ollama server first
+# before debugging anything else (see the unexplained 19.6 tok/s run).
+PREFILL_TOK_S_FLOOR = 40
+
+# Sampling presets (1.2).
+# Always set every cut-off explicitly. Ollama's defaults (top_k 40, top_p 0.9)
+# silently limit what temperature can do, so leaving them implicit hides changes.
+SAMPLING_DETERMINISTIC = {"temperature": 0.0, "seed": 42}          # RAG answers, eval, query rewriting
+SAMPLING_VARIED = {"temperature": 0.7, "top_k": 1000,              # multi-query expansion only
+                   "top_p": 1.0, "min_p": 0.1}
