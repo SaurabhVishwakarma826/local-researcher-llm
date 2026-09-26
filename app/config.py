@@ -26,3 +26,16 @@ PREFILL_TOK_S_FLOOR = 40
 SAMPLING_DETERMINISTIC = {"temperature": 0.0, "seed": 42}          # RAG answers, eval, query rewriting
 SAMPLING_VARIED = {"temperature": 0.7, "top_k": 1000,              # multi-query expansion only
                    "top_p": 1.0, "min_p": 0.1}
+
+
+# Chat (1.4)
+SYSTEM_PROMPT = ("You are a concise technical assistant. "
+                 "If you are not sure of a fact, say so instead of guessing.")
+
+# Rough estimate for English. Phase 2 replaces this with the real tokenizer.
+CHARS_PER_TOKEN_ESTIMATE = 3.5
+
+# Why 4000 and not most of NUM_CTX: when old messages are dropped, the start of
+# the prompt changes, so Ollama's prompt cache is lost and the WHOLE history is
+# re-read. At ~66 tok/s, 4000 tokens = ~60 s for that one turn; 12000 = ~3 min.
+CHAT_HISTORY_BUDGET = 4000
