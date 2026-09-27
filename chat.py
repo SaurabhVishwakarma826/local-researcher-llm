@@ -1,5 +1,7 @@
 """
-chat.py — Phase 1 CLI chatbot. Run from the project root:
+chat.py — Phase 1 CLI chatbot, with exact token counting from Phase 2.
+
+Run from the project root:
 
     python chat.py
 
@@ -8,20 +10,13 @@ Commands:  /reset   /system [text]   /stats   /quit
 
 import requests
 
-from app import config, llm
-
-
-def estimate_tokens(messages) -> int:
-    """Rough count of the WHOLE conversation. Phase 2 replaces this with the real tokenizer.
-    +4 per message covers the <|im_start|>role ... <|im_end|> markers from 1.3."""
-    chars = sum(len(m["content"]) for m in messages)
-    return int(chars / config.CHARS_PER_TOKEN_ESTIMATE) + 4 * len(messages)
+from app import config, llm, tokens
 
 
 def trim(messages) -> int:
     """Drop the oldest user+assistant pair until under budget. Never drops the system message."""
     dropped = 0
-    while estimate_tokens(messages) > config.CHAT_HISTORY_BUDGET and len(messages) > 3:
+    while tokens.count_messages(messages) > config.CHAT_HISTORY_BUDGET and len(messages) > 3:
         del messages[1:3]
         dropped += 1
     return dropped
@@ -59,8 +54,8 @@ def main():
             elif cmd == "/system":
                 print(f"current system message: {messages[0]['content']!r}")
             elif cmd == "/stats":
-                print(f"messages: {len(messages)}   estimated context: "
-                      f"{estimate_tokens(messages)} / budget {config.CHAT_HISTORY_BUDGET} / num_ctx {config.NUM_CTX}")
+                print(f"messages: {len(messages)}   context: {tokens.count_messages(messages)} tokens "
+                      f"/ budget {config.CHAT_HISTORY_BUDGET} / num_ctx {config.NUM_CTX}")
             else:
                 print("unknown command. Commands: /reset  /system [text]  /stats  /quit")
             continue
@@ -71,6 +66,8 @@ def main():
             print(f"(dropped {dropped} oldest exchange(s) to stay under budget - "
                   f"expect this turn to be slow: the prompt cache is lost)")
 
+        expected = tokens.count_messages(messages)   # counted BEFORE sending
+
         print("bot > ", end="", flush=True)
         try:
             text, s = llm.stream_chat(messages, on_token=lambda t: print(t, end="", flush=True))
@@ -80,9 +77,13 @@ def main():
             continue
 
         messages.append({"role": "assistant", "content": text})
-        print(f"\n   [prompt tokens {s['prompt_tokens']} (real) | out {s['output_tokens']} | "
+        print(f"\n   [prompt {s['prompt_tokens']} tokens | out {s['output_tokens']} | "
               f"decode {s['decode_tps']:.1f} t/s | {s['total_s']:.1f}s | "
-              f"est. context {estimate_tokens(messages)}/{config.CHAT_HISTORY_BUDGET}]")
+              f"context now {tokens.count_messages(messages)}/{config.CHAT_HISTORY_BUDGET}]")
+
+        # Continuous self-check: our count before sending vs what Ollama actually read.
+        if s["prompt_tokens"] != expected:
+            print(f"   ! token count mismatch: we predicted {expected}, Ollama read {s['prompt_tokens']}")
         for w in s["warnings"]:
             print(f"   ! {w}")
 

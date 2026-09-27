@@ -32,10 +32,19 @@ SAMPLING_VARIED = {"temperature": 0.7, "top_k": 1000,              # multi-query
 SYSTEM_PROMPT = ("You are a concise technical assistant. "
                  "If you are not sure of a fact, say so instead of guessing.")
 
-# Rough estimate for English. Phase 2 replaces this with the real tokenizer.
-CHARS_PER_TOKEN_ESTIMATE = 3.5
+# Exact token counting (2.1). Same tokenizer as the Ollama model; verified
+# against prompt_eval_count 3/3. chars/3.5 was off by up to -69% on numbers.
+TOKENIZER_ID = "Qwen/Qwen2.5-3B-Instruct"
 
 # Why 4000 and not most of NUM_CTX: when old messages are dropped, the start of
 # the prompt changes, so Ollama's prompt cache is lost and the WHOLE history is
 # re-read. At ~66 tok/s, 4000 tokens = ~60 s for that one turn; 12000 = ~3 min.
 CHAT_HISTORY_BUDGET = 4000
+
+# Embeddings (2.2)
+EMBED_MODEL_ID = "BAAI/bge-small-en-v1.5"
+# BGE expects this in front of QUESTIONS only, never documents.
+EMBED_QUERY_PREFIX = "Represent this sentence for searching relevant passages: "
+# Measured in 09_embeddings.py exp 5: text past this is silently ignored.
+# embed.py refuses longer text instead of letting that happen.
+EMBED_MAX_TOKENS = 512
