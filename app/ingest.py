@@ -7,7 +7,7 @@ Every rule here comes from a measurement in 10_ingest.py (3.1):
   3. Symbol-font bullets (\uf0b7, \uf0a7) become "-"    (page 5)
   4. Line-end hyphens KEEP the hyphen                   ("co-processing" was wrongly joined)
   5. Real tables are extracted as markdown              (payslip: plain text loses the columns)
-  6. Fake tables are rejected                           (page 1 layout: 2,907 tokens of empty cells)
+  6. Fake tables are rejected                           (page 1 layout: empty cells; resume: paragraph cells)
   7. All text goes through sanitize()                   (1.3: fake control markers)
 
 Usage from the project root:
@@ -103,6 +103,11 @@ def is_real_table(rows: list, header_names: list) -> bool:
         return False
     placeholder = sum(1 for h in header_names if re.fullmatch(r"Col\d+", h or ""))
     if header_names and placeholder / len(header_names) >= 0.5:
+        return False
+    # A "table" whose cells are paragraphs is a page layout (two-column resume, author
+    # box), not data. Real data cells are short: page 6's table averaged ~60 chars.
+    filled = [len(c.strip()) for c in cells if (c or "").strip()]
+    if filled and sum(filled) / len(filled) > config.TABLE_MAX_AVG_CELL_CHARS:
         return False
     return True
 

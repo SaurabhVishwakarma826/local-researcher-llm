@@ -4,6 +4,7 @@ Phase 3 / Topic 3.2 — Chunking.
     python 11_chunking.py 1 [page]   # see where each strategy cuts one page (default page 6)
     python 11_chunking.py 2          # sizes: how many chunks, how big, prompt cost
     python 11_chunking.py 3          # retrieval score for every strategy and size
+    python 11_chunking.py 4          # the final app/chunk.py, scored the same way
 
 Uses the waste-rules PDF through app/ingest.py (3.1).
 """
@@ -252,6 +253,17 @@ def _norm(s: str) -> str:
     return " ".join(s.lower().split())
 
 
+def score(texts: list, q_vecs: list) -> tuple:
+    vecs = embed.embed_documents(texts)
+    marks, rr = [], []
+    for (q, phrase), qv in zip(QUESTIONS, q_vecs):
+        order = np.argsort(-embed.similarity(qv, vecs))[:TOP_K]
+        rank = next((r for r, j in enumerate(order, 1) if _norm(phrase) in _norm(texts[j])), None)
+        marks.append(str(rank) if rank else ".")
+        rr.append(1 / rank if rank else 0)
+    return marks, sum(m != "." for m in marks), sum(rr) / len(rr), len(texts)
+
+
 def exp3_retrieval():
     pages = load_pages()
     q_vecs = [embed.embed_query(q) for q, _ in QUESTIONS]
@@ -259,20 +271,11 @@ def exp3_retrieval():
     for name in STRATEGIES:
         for size in SIZES:
             label = f"{name}-{size}"
-            chunks = build(pages, name, size)
-            texts = [c for _, c in chunks]
+            texts = [c for _, c in build(pages, name, size)]
             try:
-                vecs = embed.embed_documents(texts)
+                results[label] = score(texts, q_vecs)
             except ValueError as e:
                 print(f"{label}: CANNOT EMBED — {e}")
-                continue
-            marks, rr = [], []
-            for (q, phrase), qv in zip(QUESTIONS, q_vecs):
-                order = np.argsort(-embed.similarity(qv, vecs))[:TOP_K]
-                rank = next((r for r, j in enumerate(order, 1) if _norm(phrase) in _norm(texts[j])), None)
-                marks.append(str(rank) if rank else ".")
-                rr.append(1 / rank if rank else 0)
-            results[label] = (marks, sum(m != "." for m in marks), sum(rr) / len(rr), len(texts))
 
     print(f"Each column is one question. Number = rank where the answer phrase was found "
           f"(1 = top), '.' = not in top {TOP_K}.\n")
@@ -285,6 +288,25 @@ def exp3_retrieval():
     print("phrased differently, so these scores are optimistic. Phase 4 fixes that.")
 
 
+# ---------------------------------------------------------------------------
+# 4 — The final app/chunk.py, scored the same way
+# ---------------------------------------------------------------------------
+def exp4_final():
+    from app.chunk import chunk_pages
+    pages = load_pages()
+    q_vecs = [embed.embed_query(q) for q, _ in QUESTIONS]
+    chunks = chunk_pages(pages)
+    marks, hits, mrr, n = score([c.text for c in chunks], q_vecs)
+    sizes = [c.n_tokens for c in chunks]
+    print(f"app/chunk.py   {n} chunks, avg {sum(sizes) / len(sizes):.0f} tokens, max {max(sizes)}")
+    print(f"               {'  '.join(marks)}   {hits}/{len(QUESTIONS)}   MRR {mrr:.2f}")
+    print("               (structure-300 before the fixes: 1  2  1  1  1  .  2  1  1  1   9/10   MRR 0.80)")
+    for label, phrase in (("q6", "mass removed"), ("q9", "Near-zero")):
+        c = next((c for c in chunks if _norm(phrase) in _norm(c.text)), None)
+        if c:
+            print(f"\n{label} chunk: {c.id}\n  heading: {c.heading!r}")
+
+
 if __name__ == "__main__":
     key = sys.argv[1] if len(sys.argv) > 1 else "1"
     if key == "1":
@@ -293,5 +315,7 @@ if __name__ == "__main__":
         exp2_sizes()
     elif key == "3":
         exp3_retrieval()
+    elif key == "4":
+        exp4_final()
     else:
         sys.exit(__doc__)

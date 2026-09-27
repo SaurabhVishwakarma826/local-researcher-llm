@@ -52,3 +52,11 @@ EMBED_MAX_TOKENS = 512
 DOCS_DIR = "data/pdfs"          # only this folder is ingested. Personal files go in data/private.
 MIN_PAGE_CHARS = 50             # below this, a page is treated as having no text layer
 TABLE_MAX_EMPTY_RATIO = 0.5     # page 1's fake "table" was mostly empty cells
+
+# Chunking (3.2)
+# Measured in 11_chunking.py: structure-300 scored 9/10, MRR 0.80, ~6 s top-3 prefill.
+CHUNK_MAX_TOKENS = 300
+
+# A "table" whose cells average more than this many characters is a page layout
+# (two-column resume, author box), not data. Page 6's real table averaged ~60.
+TABLE_MAX_AVG_CELL_CHARS = 200
