@@ -48,3 +48,7 @@ EMBED_QUERY_PREFIX = "Represent this sentence for searching relevant passages: "
 # Measured in 09_embeddings.py exp 5: text past this is silently ignored.
 # embed.py refuses longer text instead of letting that happen.
 EMBED_MAX_TOKENS = 512
+
+DOCS_DIR = "data/pdfs"          # only this folder is ingested. Personal files go in data/private.
+MIN_PAGE_CHARS = 50             # below this, a page is treated as having no text layer
+TABLE_MAX_EMPTY_RATIO = 0.5     # page 1's fake "table" was mostly empty cells
