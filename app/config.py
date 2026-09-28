@@ -60,3 +60,8 @@ CHUNK_MAX_TOKENS = 300
 # A "table" whose cells average more than this many characters is a page layout
 # (two-column resume, author box), not data. Page 6's real table averaged ~60.
 TABLE_MAX_AVG_CELL_CHARS = 200
+
+# Vector store (3.3)
+CHROMA_DIR = "data/chroma"      # inside data/, so it is already git-ignored
+CHROMA_COLLECTION = "docs"
+TOP_K = 3   
