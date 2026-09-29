@@ -1,0 +1,1747 @@
+{
+  "timestamp": "20260929_232600",
+  "kind": "retrieval",
+  "label": "baseline",
+  "split": "test",
+  "seconds": 4.1,
+  "config": {
+    "embed_model": "BAAI/bge-small-en-v1.5",
+    "chunk_max_tokens": 300,
+    "top_k": 3,
+    "n_chunks": 62,
+    "llm": "qwen2.5:3b",
+    "prompt_style": "v3"
+  },
+  "summary": {
+    "answerable": {
+      "n": 33,
+      "hit@1": 0.636,
+      "hit@3": 0.848,
+      "hit@5": 0.909,
+      "hit@10": 0.97,
+      "mrr": 0.745
+    },
+    "unfindable": [],
+    "by_author": {
+      "claude": {
+        "n": 27,
+        "hit@1": 0.593,
+        "hit@3": 0.815,
+        "hit@5": 0.889,
+        "hit@10": 0.963,
+        "mrr": 0.714
+      },
+      "saurabh": {
+        "n": 6,
+        "hit@1": 0.833,
+        "hit@3": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "mrr": 0.889
+      }
+    },
+    "by_tag": {
+      "(untagged)": {
+        "n": 4,
+        "hit@1": 0.5,
+        "hit@3": 0.75,
+        "hit@5": 0.75,
+        "hit@10": 0.75,
+        "mrr": 0.625
+      },
+      "cross-page": {
+        "n": 1,
+        "hit@1": 0.0,
+        "hit@3": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "mrr": 0.5
+      },
+      "informal": {
+        "n": 10,
+        "hit@1": 0.8,
+        "hit@3": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "mrr": 0.883
+      },
+      "list": {
+        "n": 5,
+        "hit@1": 1.0,
+        "hit@3": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "mrr": 1.0
+      },
+      "multi-item": {
+        "n": 4,
+        "hit@1": 0.75,
+        "hit@3": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "mrr": 0.875
+      },
+      "numbers": {
+        "n": 9,
+        "hit@1": 0.667,
+        "hit@3": 0.889,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "mrr": 0.769
+      },
+      "paraphrase-pair": {
+        "n": 2,
+        "hit@1": 1.0,
+        "hit@3": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "mrr": 1.0
+      },
+      "premise": {
+        "n": 3,
+        "hit@1": 0.0,
+        "hit@3": 0.667,
+        "hit@5": 0.667,
+        "hit@10": 1.0,
+        "mrr": 0.256
+      },
+      "reasoning": {
+        "n": 1,
+        "hit@1": 1.0,
+        "hit@3": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "mrr": 1.0
+      },
+      "references": {
+        "n": 1,
+        "hit@1": 0.0,
+        "hit@3": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "mrr": 0.333
+      },
+      "table": {
+        "n": 4,
+        "hit@1": 0.25,
+        "hit@3": 0.5,
+        "hit@5": 0.75,
+        "hit@10": 1.0,
+        "mrr": 0.438
+      },
+      "two-part": {
+        "n": 3,
+        "hit@1": 1.0,
+        "hit@3": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "mrr": 1.0
+      }
+    },
+    "threshold": {
+      "answerable_found_at_1": [
+        0.5677,
+        0.803
+      ],
+      "refuse_best_scores": [
+        0.5209,
+        0.7256
+      ],
+      "refuse_above_lowest_answerable": 8,
+      "n_refuse": 11
+    }
+  },
+  "per_question": [
+    {
+      "id": "t01",
+      "by": "saurabh",
+      "type": "answer",
+      "tags": [
+        "informal",
+        "multi-item",
+        "paraphrase-pair"
+      ],
+      "question": "What Saurabh has build using Flask",
+      "top_score": 0.6414,
+      "retrieved": [
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c5",
+          "score": 0.6414
+        },
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c2",
+          "score": 0.5876
+        },
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c4",
+          "score": 0.5453
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p4-c1",
+          "score": 0.5449
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p4-c3",
+          "score": 0.5334
+        }
+      ],
+      "rank": 1,
+      "findable": true,
+      "evidence_chunks": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c5"
+      ]
+    },
+    {
+      "id": "t02",
+      "by": "saurabh",
+      "type": "answer",
+      "tags": [
+        "multi-item",
+        "paraphrase-pair"
+      ],
+      "question": "What has Saurabh built using Flask?",
+      "top_score": 0.6294,
+      "retrieved": [
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c5",
+          "score": 0.6294
+        },
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c2",
+          "score": 0.5593
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p4-c1",
+          "score": 0.5302
+        },
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c4",
+          "score": 0.5287
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c5",
+          "score": 0.5159
+        }
+      ],
+      "rank": 1,
+      "findable": true,
+      "evidence_chunks": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c5"
+      ]
+    },
+    {
+      "id": "t03",
+      "by": "saurabh",
+      "type": "answer",
+      "tags": [
+        "informal",
+        "multi-item"
+      ],
+      "question": "What Saurabh has build using Django",
+      "top_score": 0.6781,
+      "retrieved": [
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c5",
+          "score": 0.6781
+        },
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c2",
+          "score": 0.5676
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p4-c1",
+          "score": 0.5271
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p5-c1",
+          "score": 0.5268
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c4",
+          "score": 0.5237
+        }
+      ],
+      "rank": 1,
+      "findable": true,
+      "evidence_chunks": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c5"
+      ]
+    },
+    {
+      "id": "t04",
+      "by": "saurabh",
+      "type": "answer",
+      "tags": [
+        "informal"
+      ],
+      "question": "what is news aggregator",
+      "top_score": 0.6756,
+      "retrieved": [
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c5",
+          "score": 0.6756
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p4-c2",
+          "score": 0.5429
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p4-c1",
+          "score": 0.5097
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p12-c1",
+          "score": 0.4922
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c3",
+          "score": 0.4844
+        }
+      ],
+      "rank": 1,
+      "findable": true,
+      "evidence_chunks": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c5"
+      ]
+    },
+    {
+      "id": "t05",
+      "by": "saurabh",
+      "type": "answer",
+      "tags": [
+        "informal",
+        "list"
+      ],
+      "question": "what are the courses saurabh has done",
+      "top_score": 0.5677,
+      "retrieved": [
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c1",
+          "score": 0.5677
+        },
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c3",
+          "score": 0.5371
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p13-c3",
+          "score": 0.5169
+        },
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c0",
+          "score": 0.5125
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p13-c4",
+          "score": 0.5123
+        }
+      ],
+      "rank": 1,
+      "findable": true,
+      "evidence_chunks": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c1"
+      ]
+    },
+    {
+      "id": "t06",
+      "by": "saurabh",
+      "type": "answer",
+      "tags": [
+        "informal",
+        "premise"
+      ],
+      "question": "on which publication saurabh has publish the paper and which topic or prject",
+      "top_score": 0.5832,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c1",
+          "score": 0.5832
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p13-c4",
+          "score": 0.5545
+        },
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c3",
+          "score": 0.5517
+        },
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c5",
+          "score": 0.5365
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p4-c3",
+          "score": 0.5362
+        }
+      ],
+      "rank": 3,
+      "findable": true,
+      "evidence_chunks": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c3"
+      ]
+    },
+    {
+      "id": "c01",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "numbers"
+      ],
+      "question": "When did the new solid waste rules actually start applying?",
+      "top_score": 0.7813,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c2",
+          "score": 0.7813
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p13-c3",
+          "score": 0.7164
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c4",
+          "score": 0.7128
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c1",
+          "score": 0.7042
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c3",
+          "score": 0.6927
+        }
+      ],
+      "rank": 1,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p1-c2"
+      ]
+    },
+    {
+      "id": "c02",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "informal"
+      ],
+      "question": "where is dry waste supposed to be sent after collection",
+      "top_score": 0.6796,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c6",
+          "score": 0.6796
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p7-c2",
+          "score": 0.6584
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p2-c0",
+          "score": 0.6417
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p11-c0",
+          "score": 0.6368
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p8-c0",
+          "score": 0.6351
+        }
+      ],
+      "rank": 1,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p1-c6"
+      ]
+    },
+    {
+      "id": "c03",
+      "by": "claude",
+      "type": "answer",
+      "tags": [],
+      "question": "What happens to wet waste under the four-stream system?",
+      "top_score": 0.7536,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p2-c1",
+          "score": 0.7536
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c6",
+          "score": 0.7502
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p8-c1",
+          "score": 0.6988
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p7-c2",
+          "score": 0.6945
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p9-c3",
+          "score": 0.6858
+        }
+      ],
+      "rank": 2,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p1-c6"
+      ]
+    },
+    {
+      "id": "c04",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "list"
+      ],
+      "question": "Give some examples of special-care household waste.",
+      "top_score": 0.7665,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p2-c0",
+          "score": 0.7665
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p7-c4",
+          "score": 0.6692
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p7-c3",
+          "score": 0.6621
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c6",
+          "score": 0.6468
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p12-c1",
+          "score": 0.627
+        }
+      ],
+      "rank": 1,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p2-c0"
+      ]
+    },
+    {
+      "id": "c05",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "numbers"
+      ],
+      "question": "How big does a building have to be to count as a bulk waste generator?",
+      "top_score": 0.769,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p2-c2",
+          "score": 0.769
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p9-c3",
+          "score": 0.6612
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p12-c1",
+          "score": 0.6485
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p2-c3",
+          "score": 0.6338
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p4-c3",
+          "score": 0.6316
+        }
+      ],
+      "rank": 1,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p2-c2"
+      ]
+    },
+    {
+      "id": "c06",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "numbers",
+        "reasoning"
+      ],
+      "question": "If a hotel produces 150 kg of waste a day, is it a bulk waste generator?",
+      "top_score": 0.7193,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p2-c2",
+          "score": 0.7193
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p9-c3",
+          "score": 0.6408
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p12-c1",
+          "score": 0.6217
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p6-c1",
+          "score": 0.6168
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p8-c1",
+          "score": 0.6095
+        }
+      ],
+      "rank": 1,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p2-c2"
+      ]
+    },
+    {
+      "id": "c07",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "two-part"
+      ],
+      "question": "Who writes the environmental compensation guidelines, and who actually collects the money?",
+      "top_score": 0.7357,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p3-c1",
+          "score": 0.7357
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p4-c0",
+          "score": 0.6923
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c2",
+          "score": 0.6608
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c4",
+          "score": 0.6321
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c3",
+          "score": 0.6314
+        }
+      ],
+      "rank": 1,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p3-c1"
+      ]
+    },
+    {
+      "id": "c08",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "informal",
+        "list"
+      ],
+      "question": "what kind of violations make someone pay environmental compensation",
+      "top_score": 0.7586,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p3-c1",
+          "score": 0.7586
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p4-c0",
+          "score": 0.7044
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p13-c3",
+          "score": 0.6272
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c4",
+          "score": 0.6265
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p8-c3",
+          "score": 0.6259
+        }
+      ],
+      "rank": 1,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p3-c1"
+      ]
+    },
+    {
+      "id": "c09",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "numbers",
+        "two-part"
+      ],
+      "question": "Which waste facilities need a buffer zone, and who decides how big it is?",
+      "top_score": 0.7782,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p4-c3",
+          "score": 0.7782
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p2-c2",
+          "score": 0.6731
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c2",
+          "score": 0.6529
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c6",
+          "score": 0.6449
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p6-c1",
+          "score": 0.6418
+        }
+      ],
+      "rank": 1,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p4-c3"
+      ]
+    },
+    {
+      "id": "c10",
+      "by": "claude",
+      "type": "answer",
+      "tags": [],
+      "question": "What simple equation does the paper suggest for checking that waste numbers add up?",
+      "top_score": 0.6474,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c5",
+          "score": 0.6474
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p12-c0",
+          "score": 0.6298
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p12-c6",
+          "score": 0.6277
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p10-c1",
+          "score": 0.6236
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p4-c1",
+          "score": 0.6208
+        }
+      ],
+      "rank": null,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p4-c2"
+      ]
+    },
+    {
+      "id": "c11",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "table"
+      ],
+      "question": "Compared with the 2016 rules, how is monitoring done now?",
+      "top_score": 0.6827,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c5",
+          "score": 0.6827
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p4-c0",
+          "score": 0.6454
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p12-c5",
+          "score": 0.6422
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p4-c1",
+          "score": 0.631
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p2-c3",
+          "score": 0.631
+        }
+      ],
+      "rank": 6,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p6-c2"
+      ]
+    },
+    {
+      "id": "c12",
+      "by": "claude",
+      "type": "answer",
+      "tags": [],
+      "question": "How often do cities have to report progress on cleaning up old dumpsites?",
+      "top_score": 0.6893,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p8-c4",
+          "score": 0.6893
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p6-c0",
+          "score": 0.671
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c2",
+          "score": 0.6364
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p11-c0",
+          "score": 0.6273
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p5-c2",
+          "score": 0.6264
+        }
+      ],
+      "rank": 1,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p5-c2",
+        "solid_waste_management_rules_2026.pdf#p6-c0",
+        "solid_waste_management_rules_2026.pdf#p6-c2",
+        "solid_waste_management_rules_2026.pdf#p8-c4"
+      ]
+    },
+    {
+      "id": "c13",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "numbers"
+      ],
+      "question": "What contamination level in dry recyclables counts as good enough for efficient recovery?",
+      "top_score": 0.7151,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p8-c0",
+          "score": 0.7151
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p7-c2",
+          "score": 0.7102
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p5-c0",
+          "score": 0.7044
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p9-c3",
+          "score": 0.703
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p11-c0",
+          "score": 0.7024
+        }
+      ],
+      "rank": 4,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p9-c3"
+      ]
+    },
+    {
+      "id": "c14",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "numbers"
+      ],
+      "question": "At what utilisation level does an MRF indicate problems further upstream?",
+      "top_score": 0.7164,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p10-c0",
+          "score": 0.7164
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p5-c0",
+          "score": 0.6775
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p8-c6",
+          "score": 0.6635
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p5-c1",
+          "score": 0.6563
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p9-c3",
+          "score": 0.6427
+        }
+      ],
+      "rank": 1,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p10-c0"
+      ]
+    },
+    {
+      "id": "c15",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "numbers"
+      ],
+      "question": "How is the incident rate for waste workers measured?",
+      "top_score": 0.803,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p12-c0",
+          "score": 0.803
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p12-c1",
+          "score": 0.675
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p12-c2",
+          "score": 0.6721
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p9-c2",
+          "score": 0.6674
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p10-c0",
+          "score": 0.6662
+        }
+      ],
+      "rank": 1,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p12-c0"
+      ]
+    },
+    {
+      "id": "c16",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "cross-page"
+      ],
+      "question": "How must sanitary waste be handled, and why does it matter?",
+      "top_score": 0.7494,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p7-c4",
+          "score": 0.7494
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c6",
+          "score": 0.702
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c4",
+          "score": 0.6972
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p12-c0",
+          "score": 0.6962
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p2-c0",
+          "score": 0.6861
+        }
+      ],
+      "rank": 2,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p1-c6"
+      ]
+    },
+    {
+      "id": "c17",
+      "by": "claude",
+      "type": "answer",
+      "tags": [],
+      "question": "Why might the RDF fuel targets fail in practice?",
+      "top_score": 0.727,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p5-c1",
+          "score": 0.727
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p8-c2",
+          "score": 0.6677
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p8-c6",
+          "score": 0.6531
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p5-c0",
+          "score": 0.6256
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p8-c3",
+          "score": 0.6255
+        }
+      ],
+      "rank": 1,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p5-c1"
+      ]
+    },
+    {
+      "id": "c18",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "informal",
+        "list"
+      ],
+      "question": "who all are responsible under swm 2026 apart from the municipality",
+      "top_score": 0.7176,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p12-c3",
+          "score": 0.7176
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p9-c1",
+          "score": 0.712
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p13-c1",
+          "score": 0.7055
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p12-c2",
+          "score": 0.7051
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p13-c3",
+          "score": 0.6857
+        }
+      ],
+      "rank": 1,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p12-c3"
+      ]
+    },
+    {
+      "id": "c19",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "numbers",
+        "references"
+      ],
+      "question": "Where does the paper say the 2016 rules were notified, and on what date?",
+      "top_score": 0.657,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c5",
+          "score": 0.657
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c2",
+          "score": 0.6422
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p13-c3",
+          "score": 0.6185
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p13-c4",
+          "score": 0.6127
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p6-c2",
+          "score": 0.6028
+        }
+      ],
+      "rank": 3,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p13-c3"
+      ]
+    },
+    {
+      "id": "c20",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "premise"
+      ],
+      "question": "Why does SWM 2026 ban composting?",
+      "top_score": 0.7511,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p13-c2",
+          "score": 0.7511
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p13-c1",
+          "score": 0.7416
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p12-c2",
+          "score": 0.7381
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p7-c2",
+          "score": 0.7198
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p13-c3",
+          "score": 0.7137
+        }
+      ],
+      "rank": 10,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p1-c6"
+      ]
+    },
+    {
+      "id": "c21",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "premise",
+        "numbers"
+      ],
+      "question": "How much has the landfill fee for unsegregated waste been reduced under the new rules?",
+      "top_score": 0.7251,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c2",
+          "score": 0.7251
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p12-c6",
+          "score": 0.698
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p5-c2",
+          "score": 0.6972
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c3",
+          "score": 0.6879
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p7-c2",
+          "score": 0.6849
+        }
+      ],
+      "rank": 3,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p5-c2"
+      ]
+    },
+    {
+      "id": "c22",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "two-part"
+      ],
+      "question": "Where did Saurabh study engineering, and what was his CGPA?",
+      "top_score": 0.6396,
+      "retrieved": [
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c0",
+          "score": 0.6396
+        },
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c3",
+          "score": 0.5305
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p8-c5",
+          "score": 0.5299
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c0",
+          "score": 0.4951
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p4-c3",
+          "score": 0.4911
+        }
+      ],
+      "rank": 1,
+      "findable": true,
+      "evidence_chunks": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c0"
+      ]
+    },
+    {
+      "id": "c23",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "informal",
+        "multi-item"
+      ],
+      "question": "which internship did saurabh do in 2022",
+      "top_score": 0.6056,
+      "retrieved": [
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c3",
+          "score": 0.6056
+        },
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c4",
+          "score": 0.5457
+        },
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c0",
+          "score": 0.5236
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p13-c4",
+          "score": 0.5172
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p13-c3",
+          "score": 0.5158
+        }
+      ],
+      "rank": 2,
+      "findable": true,
+      "evidence_chunks": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c4"
+      ]
+    },
+    {
+      "id": "c24",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "list"
+      ],
+      "question": "What machine learning models did Saurabh build during his internship at Yoshops?",
+      "top_score": 0.633,
+      "retrieved": [
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c4",
+          "score": 0.633
+        },
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c1",
+          "score": 0.6169
+        },
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c5",
+          "score": 0.5846
+        },
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c2",
+          "score": 0.5196
+        },
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c3",
+          "score": 0.4988
+        }
+      ],
+      "rank": 1,
+      "findable": true,
+      "evidence_chunks": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c4"
+      ]
+    },
+    {
+      "id": "c25",
+      "by": "claude",
+      "type": "refuse",
+      "tags": [
+        "near-miss",
+        "numbers"
+      ],
+      "question": "What is the exact environmental compensation amount in rupees for forged documents?",
+      "top_score": 0.674,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p3-c1",
+          "score": 0.674
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c4",
+          "score": 0.6497
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p4-c0",
+          "score": 0.6241
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p13-c3",
+          "score": 0.6133
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p11-c0",
+          "score": 0.6041
+        }
+      ]
+    },
+    {
+      "id": "c26",
+      "by": "claude",
+      "type": "refuse",
+      "tags": [
+        "near-miss",
+        "numbers"
+      ],
+      "question": "By which year must every city reach 100% four-stream segregation?",
+      "top_score": 0.6532,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p2-c1",
+          "score": 0.6532
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p9-c3",
+          "score": 0.639
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c6",
+          "score": 0.617
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p6-c2",
+          "score": 0.5936
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p7-c3",
+          "score": 0.5632
+        }
+      ]
+    },
+    {
+      "id": "c27",
+      "by": "claude",
+      "type": "refuse",
+      "tags": [
+        "near-miss",
+        "numbers"
+      ],
+      "question": "How many material recovery facilities are there in India today?",
+      "top_score": 0.6598,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p7-c5",
+          "score": 0.6598
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c4",
+          "score": 0.6421
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p5-c0",
+          "score": 0.6299
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c3",
+          "score": 0.6175
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p3-c0",
+          "score": 0.6123
+        }
+      ]
+    },
+    {
+      "id": "c28",
+      "by": "claude",
+      "type": "refuse",
+      "tags": [
+        "near-miss",
+        "numbers"
+      ],
+      "question": "How much municipal solid waste did India generate in 2025?",
+      "top_score": 0.7256,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c4",
+          "score": 0.7256
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p13-c3",
+          "score": 0.7099
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c1",
+          "score": 0.7006
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c2",
+          "score": 0.6896
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p3-c0",
+          "score": 0.68
+        }
+      ]
+    },
+    {
+      "id": "c29",
+      "by": "claude",
+      "type": "refuse",
+      "tags": [
+        "near-miss"
+      ],
+      "question": "Which Indian city has the best segregation rate under SWM 2026?",
+      "top_score": 0.6319,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p12-c2",
+          "score": 0.6319
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p6-c2",
+          "score": 0.6165
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c4",
+          "score": 0.6115
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p13-c3",
+          "score": 0.6043
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p9-c1",
+          "score": 0.593
+        }
+      ]
+    },
+    {
+      "id": "c30",
+      "by": "claude",
+      "type": "refuse",
+      "tags": [
+        "near-miss",
+        "numbers"
+      ],
+      "question": "How much does an EBWGR certificate cost?",
+      "top_score": 0.6404,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p2-c3",
+          "score": 0.6404
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p12-c1",
+          "score": 0.5697
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p3-c0",
+          "score": 0.5426
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p2-c2",
+          "score": 0.5323
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c3",
+          "score": 0.5243
+        }
+      ]
+    },
+    {
+      "id": "c31",
+      "by": "claude",
+      "type": "refuse",
+      "tags": [
+        "near-miss"
+      ],
+      "question": "What was Saurabh's salary at A-1 Fence Products?",
+      "top_score": 0.5209,
+      "retrieved": [
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c4",
+          "score": 0.5209
+        },
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c3",
+          "score": 0.4824
+        },
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c5",
+          "score": 0.476
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c4",
+          "score": 0.4588
+        },
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c0",
+          "score": 0.4397
+        }
+      ]
+    },
+    {
+      "id": "c32",
+      "by": "claude",
+      "type": "refuse",
+      "tags": [
+        "near-miss",
+        "numbers"
+      ],
+      "question": "What marks did Saurabh get in his 12th (PCMB)?",
+      "top_score": 0.5634,
+      "retrieved": [
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c0",
+          "score": 0.5634
+        },
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c3",
+          "score": 0.5476
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p13-c3",
+          "score": 0.4787
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c1",
+          "score": 0.4704
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c4",
+          "score": 0.4682
+        }
+      ]
+    },
+    {
+      "id": "c33",
+      "by": "claude",
+      "type": "refuse",
+      "tags": [
+        "world-knowledge"
+      ],
+      "question": "Who is the current Union Environment Minister of India?",
+      "top_score": 0.6082,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p13-c3",
+          "score": 0.6082
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c4",
+          "score": 0.6075
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p3-c0",
+          "score": 0.5933
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c1",
+          "score": 0.5745
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p13-c4",
+          "score": 0.5701
+        }
+      ]
+    },
+    {
+      "id": "c34",
+      "by": "claude",
+      "type": "refuse",
+      "tags": [
+        "world-knowledge",
+        "informal"
+      ],
+      "question": "what does IRI measure on roads",
+      "top_score": 0.5861,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p4-c2",
+          "score": 0.5861
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p4-c3",
+          "score": 0.5799
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p6-c1",
+          "score": 0.571
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p8-c5",
+          "score": 0.5632
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p7-c2",
+          "score": 0.5577
+        }
+      ]
+    },
+    {
+      "id": "c35",
+      "by": "claude",
+      "type": "refuse",
+      "tags": [
+        "world-knowledge"
+      ],
+      "question": "Who won the 2023 cricket world cup?",
+      "top_score": 0.5578,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p12-c2",
+          "score": 0.5578
+        },
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c3",
+          "score": 0.5473
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p9-c1",
+          "score": 0.5309
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p13-c1",
+          "score": 0.5019
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p13-c3",
+          "score": 0.5015
+        }
+      ]
+    },
+    {
+      "id": "c36",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "table"
+      ],
+      "question": "In the circular economy table, what does formally recognising MRFs achieve?",
+      "top_score": 0.7762,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p5-c0",
+          "score": 0.7762
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p7-c5",
+          "score": 0.7696
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p8-c0",
+          "score": 0.7457
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p8-c1",
+          "score": 0.7268
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p10-c0",
+          "score": 0.7024
+        }
+      ],
+      "rank": 4,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p8-c1"
+      ]
+    },
+    {
+      "id": "c37",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "table"
+      ],
+      "question": "According to the risk table, what happens to the environment if monitoring is weak?",
+      "top_score": 0.6611,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p7-c0",
+          "score": 0.6611
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p7-c2",
+          "score": 0.651
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p9-c0",
+          "score": 0.648
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p11-c0",
+          "score": 0.6438
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p8-c6",
+          "score": 0.637
+        }
+      ],
+      "rank": 3,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p9-c0",
+        "solid_waste_management_rules_2026.pdf#p9-c1"
+      ]
+    },
+    {
+      "id": "c38",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "table",
+        "informal"
+      ],
+      "question": "how often should ppe compliance be reported",
+      "top_score": 0.7249,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p12-c0",
+          "score": 0.7249
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p12-c1",
+          "score": 0.6829
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p4-c0",
+          "score": 0.6478
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p4-c2",
+          "score": 0.64
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p9-c2",
+          "score": 0.6326
+        }
+      ],
+      "rank": 1,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p12-c0",
+        "solid_waste_management_rules_2026.pdf#p12-c1"
+      ]
+    }
+  ]
+}
