@@ -62,6 +62,7 @@ class Answer:
     malformed: list         # invented citation formats like [D3]
     hits: list              # Hits that were put in the prompt
     prompt_tokens: int
+    output_tokens: int
     seconds: float
     messages: list          # the exact messages sent, for inspection
     style: str
@@ -120,7 +121,7 @@ def answer_from_hits(question: str, hits: list, style: str = None) -> Answer:
     bad = sorted({i for i in nums if not 1 <= i <= len(hits)})
     return Answer(question=question, text=text, refused=_is_refusal(text), cited=cited,
                   bad_citations=bad, malformed=_MALFORMED.findall(text), hits=hits,
-                  prompt_tokens=s["prompt_tokens"], seconds=s["total_s"], messages=msgs, style=style)
+                  prompt_tokens=s["prompt_tokens"], output_tokens=s.get("output_tokens", 0), seconds=s["total_s"], messages=msgs, style=style)
 
 
 def answer(question: str, k: int = None, source: str = None, style: str = None) -> Answer:
