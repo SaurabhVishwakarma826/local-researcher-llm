@@ -1,0 +1,1466 @@
+{
+  "timestamp": "20261002_232635",
+  "kind": "answer",
+  "label": "phase5_v1",
+  "split": "test",
+  "seconds": 666.6,
+  "config": {
+    "embed_model": "BAAI/bge-small-en-v1.5",
+    "chunk_max_tokens": 300,
+    "top_k": 3,
+    "n_chunks": 62,
+    "llm": "qwen2.5:3b",
+    "prompt_style": "v1",
+    "retrieval_mode": "hybrid",
+    "reranker": "minilm"
+  },
+  "summary": {
+    "answerable": {
+      "n": 33,
+      "correct": 0.758,
+      "categories": {
+        "correct": 25,
+        "partial": 2,
+        "retrieval_miss": 3,
+        "wrongly_refused": 3
+      }
+    },
+    "refuse": {
+      "n": 11,
+      "refused_correctly": 1.0,
+      "categories": {
+        "refused": 11
+      }
+    },
+    "contradictory": 6,
+    "citations_on_correct_answers": {
+      "n": 25,
+      "valid": 0.8,
+      "right_document": 0.8,
+      "exact_passage": 0.56,
+      "answers_with_invented_format": 7
+    },
+    "by_author": {
+      "claude (answer)": {
+        "n": 27,
+        "score": 0.741
+      },
+      "claude (refuse)": {
+        "n": 11,
+        "score": 1.0
+      },
+      "saurabh (answer)": {
+        "n": 6,
+        "score": 0.833
+      }
+    },
+    "by_tag": {
+      "(untagged) (answer)": {
+        "n": 4,
+        "score": 0.75
+      },
+      "cross-page (answer)": {
+        "n": 1,
+        "score": 1.0
+      },
+      "informal (answer)": {
+        "n": 10,
+        "score": 0.8
+      },
+      "informal (refuse)": {
+        "n": 1,
+        "score": 1.0
+      },
+      "list (answer)": {
+        "n": 5,
+        "score": 0.8
+      },
+      "multi-item (answer)": {
+        "n": 4,
+        "score": 1.0
+      },
+      "near-miss (refuse)": {
+        "n": 8,
+        "score": 1.0
+      },
+      "numbers (answer)": {
+        "n": 9,
+        "score": 0.667
+      },
+      "numbers (refuse)": {
+        "n": 6,
+        "score": 1.0
+      },
+      "paraphrase-pair (answer)": {
+        "n": 2,
+        "score": 1.0
+      },
+      "premise (answer)": {
+        "n": 3,
+        "score": 0.0
+      },
+      "reasoning (answer)": {
+        "n": 1,
+        "score": 0.0
+      },
+      "references (answer)": {
+        "n": 1,
+        "score": 1.0
+      },
+      "table (answer)": {
+        "n": 4,
+        "score": 0.75
+      },
+      "two-part (answer)": {
+        "n": 3,
+        "score": 1.0
+      },
+      "world-knowledge (refuse)": {
+        "n": 3,
+        "score": 1.0
+      }
+    },
+    "cost": {
+      "mean_seconds": 12.4,
+      "median_seconds": 13.4,
+      "p90_seconds": 17.5,
+      "max_seconds": 31.0,
+      "mean_prompt_tokens": 724,
+      "mean_output_tokens": 47
+    }
+  },
+  "per_question": [
+    {
+      "id": "t01",
+      "by": "saurabh",
+      "type": "answer",
+      "tags": [
+        "informal",
+        "multi-item",
+        "paraphrase-pair"
+      ],
+      "question": "What Saurabh has build using Flask",
+      "answer": "[S2] Saurabh Vishwakarma has built a URL Shortener API using Flask and MongoDB.",
+      "prompt_ids": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c5",
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c2",
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c4"
+      ],
+      "cited": [],
+      "bad_citations": [],
+      "malformed": [
+        "[S2]"
+      ],
+      "prompt_tokens": 722,
+      "output_tokens": 23,
+      "seconds": 10.9,
+      "evidence_in_prompt": true,
+      "cite_right_doc": false,
+      "cite_exact": false,
+      "category": "correct",
+      "refused": false,
+      "violations": [],
+      "facts_met": "1/1",
+      "contradictory": false
+    },
+    {
+      "id": "t02",
+      "by": "saurabh",
+      "type": "answer",
+      "tags": [
+        "multi-item",
+        "paraphrase-pair"
+      ],
+      "question": "What has Saurabh built using Flask?",
+      "answer": "[S3] Saurabh Vishwakarma has built a URL Shortener API using Flask and MongoDB.",
+      "prompt_ids": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c5",
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c2",
+        "solid_waste_management_rules_2026.pdf#p2-c2"
+      ],
+      "cited": [],
+      "bad_citations": [],
+      "malformed": [
+        "[S3]"
+      ],
+      "prompt_tokens": 786,
+      "output_tokens": 23,
+      "seconds": 7.1,
+      "evidence_in_prompt": true,
+      "cite_right_doc": false,
+      "cite_exact": false,
+      "category": "correct",
+      "refused": false,
+      "violations": [],
+      "facts_met": "1/1",
+      "contradictory": false
+    },
+    {
+      "id": "t03",
+      "by": "saurabh",
+      "type": "answer",
+      "tags": [
+        "informal",
+        "multi-item"
+      ],
+      "question": "What Saurabh has build using Django",
+      "answer": "[D3] Saurabh Vishwakarma developed a Vendor Management System using Django and Django REST Framework.",
+      "prompt_ids": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c5",
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c2",
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c4"
+      ],
+      "cited": [],
+      "bad_citations": [],
+      "malformed": [
+        "[D3]"
+      ],
+      "prompt_tokens": 722,
+      "output_tokens": 23,
+      "seconds": 7.8,
+      "evidence_in_prompt": true,
+      "cite_right_doc": false,
+      "cite_exact": false,
+      "category": "correct",
+      "refused": false,
+      "violations": [],
+      "facts_met": "1/1",
+      "contradictory": false
+    },
+    {
+      "id": "t04",
+      "by": "saurabh",
+      "type": "answer",
+      "tags": [
+        "informal"
+      ],
+      "question": "what is news aggregator",
+      "answer": "[1]\nThe News Aggregator web application developed by Saurabh Vishwakarma consolidates news articles from various sources for centralized access. It also integrates Machine Learning models to enhance credibility by classifying news as real or fake.",
+      "prompt_ids": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c5",
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c3",
+        "solid_waste_management_rules_2026.pdf#p4-c1"
+      ],
+      "cited": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c5"
+      ],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 875,
+      "output_tokens": 48,
+      "seconds": 13.4,
+      "evidence_in_prompt": true,
+      "cite_right_doc": true,
+      "cite_exact": true,
+      "category": "correct",
+      "refused": false,
+      "violations": [],
+      "facts_met": "1/1",
+      "contradictory": false
+    },
+    {
+      "id": "t05",
+      "by": "saurabh",
+      "type": "answer",
+      "tags": [
+        "informal",
+        "list"
+      ],
+      "question": "what are the courses saurabh has done",
+      "answer": "[COURSES] Data Analysis Machine Learning Deep Learining Data Sceince [3]\n\nBased on the information provided in [2], Saurabh Vishwakarma has taken courses in Data Analysis, Machine Learning, Deep Learning, and Data Science.",
+      "prompt_ids": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c5",
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c1",
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c3"
+      ],
+      "cited": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c3",
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c1"
+      ],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 616,
+      "output_tokens": 52,
+      "seconds": 8.1,
+      "evidence_in_prompt": true,
+      "cite_right_doc": true,
+      "cite_exact": true,
+      "category": "correct",
+      "refused": false,
+      "violations": [],
+      "facts_met": "4/4",
+      "contradictory": false
+    },
+    {
+      "id": "t06",
+      "by": "saurabh",
+      "type": "answer",
+      "tags": [
+        "informal",
+        "premise"
+      ],
+      "question": "on which publication saurabh has publish the paper and which topic or prject",
+      "answer": "[Saurabh Vishwakarma has published a paper on the topic \"News-Aggregator Web Application\" in the International Journal of Innovative Research in Engineering Volume 7, Issue 1 (January - February 2026), PP: 88-100. [2]]",
+      "prompt_ids": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c5",
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c3",
+        "solid_waste_management_rules_2026.pdf#p1-c0"
+      ],
+      "cited": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c3"
+      ],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 693,
+      "output_tokens": 62,
+      "seconds": 9.9,
+      "evidence_in_prompt": true,
+      "cite_right_doc": true,
+      "cite_exact": true,
+      "category": "partial",
+      "refused": false,
+      "violations": [],
+      "facts_met": "1/2",
+      "contradictory": false
+    },
+    {
+      "id": "c01",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "numbers"
+      ],
+      "question": "When did the new solid waste rules actually start applying?",
+      "answer": "[1] The Solid Waste Management Rules, 2026 came into force from 1 April 2026. [1]",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p1-c2",
+        "solid_waste_management_rules_2026.pdf#p13-c3",
+        "solid_waste_management_rules_2026.pdf#p13-c4"
+      ],
+      "cited": [
+        "solid_waste_management_rules_2026.pdf#p1-c2"
+      ],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 739,
+      "output_tokens": 31,
+      "seconds": 14.6,
+      "evidence_in_prompt": true,
+      "cite_right_doc": true,
+      "cite_exact": true,
+      "category": "correct",
+      "refused": false,
+      "violations": [],
+      "facts_met": "1/1",
+      "contradictory": false
+    },
+    {
+      "id": "c02",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "informal"
+      ],
+      "question": "where is dry waste supposed to be sent after collection",
+      "answer": "[2]\nDry waste, comprising paper, plastics, metals, glass, and multilayer packaging, is required to be transported to Material Recovery Facilities (MRFs) for secondary segregation, baling, and channelisation into formal recycling value chains.",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p9-c3",
+        "solid_waste_management_rules_2026.pdf#p1-c6",
+        "solid_waste_management_rules_2026.pdf#p8-c0"
+      ],
+      "cited": [
+        "solid_waste_management_rules_2026.pdf#p1-c6"
+      ],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 778,
+      "output_tokens": 52,
+      "seconds": 16.0,
+      "evidence_in_prompt": true,
+      "cite_right_doc": true,
+      "cite_exact": true,
+      "category": "correct",
+      "refused": false,
+      "violations": [],
+      "facts_met": "1/1",
+      "contradictory": false
+    },
+    {
+      "id": "c03",
+      "by": "claude",
+      "type": "answer",
+      "tags": [],
+      "question": "What happens to wet waste under the four-stream system?",
+      "answer": "[1]\nWet waste, primarily organic in nature, is directed towards decentralised composting or bio-methanation systems, enabling biological stabilisation and resource recovery at source or at ward-level facilities.",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p1-c6",
+        "solid_waste_management_rules_2026.pdf#p9-c3",
+        "solid_waste_management_rules_2026.pdf#p2-c1"
+      ],
+      "cited": [
+        "solid_waste_management_rules_2026.pdf#p1-c6"
+      ],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 827,
+      "output_tokens": 43,
+      "seconds": 16.4,
+      "evidence_in_prompt": true,
+      "cite_right_doc": true,
+      "cite_exact": true,
+      "category": "correct",
+      "refused": false,
+      "violations": [],
+      "facts_met": "2/2",
+      "contradictory": false
+    },
+    {
+      "id": "c04",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "list"
+      ],
+      "question": "Give some examples of special-care household waste.",
+      "answer": "[1]\n[3]\n\nExamples of special-care household waste include:\n- Household hazardous items such as fluorescent lamps\n- Thermometers\n- Expired medicines\n- Batteries\n- Paint containers\n\nThese items are to be routed exclusively through authorised collection mechanisms or designated drop-off centres, ensuring environmentally sound treatment and disposal.",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p2-c0",
+        "solid_waste_management_rules_2026.pdf#p7-c4",
+        "solid_waste_management_rules_2026.pdf#p1-c6"
+      ],
+      "cited": [
+        "solid_waste_management_rules_2026.pdf#p2-c0",
+        "solid_waste_management_rules_2026.pdf#p1-c6"
+      ],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 641,
+      "output_tokens": 65,
+      "seconds": 14.6,
+      "evidence_in_prompt": true,
+      "cite_right_doc": true,
+      "cite_exact": true,
+      "category": "correct",
+      "refused": false,
+      "violations": [],
+      "facts_met": "3/3",
+      "contradictory": false
+    },
+    {
+      "id": "c05",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "numbers"
+      ],
+      "question": "How big does a building have to be to count as a bulk waste generator?",
+      "answer": "[1]\nThe regulatory definition of bulk waste generators is framed around three measurable and verifiable thresholds: built-up area (≥20,000 m²), water consumption (≥40,000 litres per day), or waste generation (≥100 kg per day).",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p2-c2",
+        "solid_waste_management_rules_2026.pdf#p9-c2",
+        "solid_waste_management_rules_2026.pdf#p2-c3"
+      ],
+      "cited": [
+        "solid_waste_management_rules_2026.pdf#p2-c2"
+      ],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 713,
+      "output_tokens": 61,
+      "seconds": 15.2,
+      "evidence_in_prompt": true,
+      "cite_right_doc": true,
+      "cite_exact": true,
+      "category": "correct",
+      "refused": false,
+      "violations": [],
+      "facts_met": "1/1",
+      "contradictory": false
+    },
+    {
+      "id": "c06",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "numbers",
+        "reasoning"
+      ],
+      "question": "If a hotel produces 150 kg of waste a day, is it a bulk waste generator?",
+      "answer": "[1]\nThe regulatory definition of bulk waste generators includes establishments that meet any one of the following thresholds: a built-up area of ≥20,000 m², water consumption of ≥40,000 liters per day, or waste generation of ≥100 kg per day. Since the hotel produces 150 kg of waste a day, which is greater than the threshold of 100 kg per day, it meets the criteria for being a bulk waste generator.",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p2-c2",
+        "solid_waste_management_rules_2026.pdf#p9-c2",
+        "solid_waste_management_rules_2026.pdf#p2-c3"
+      ],
+      "cited": [
+        "solid_waste_management_rules_2026.pdf#p2-c2"
+      ],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 718,
+      "output_tokens": 103,
+      "seconds": 8.5,
+      "evidence_in_prompt": true,
+      "cite_right_doc": true,
+      "cite_exact": true,
+      "category": "partial",
+      "refused": false,
+      "violations": [],
+      "facts_met": "1/2",
+      "contradictory": false
+    },
+    {
+      "id": "c07",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "two-part"
+      ],
+      "question": "Who writes the environmental compensation guidelines, and who actually collects the money?",
+      "answer": "[1] The Central Pollution Control Board writes the environmental compensation guidelines. The State Pollution Control Boards / Pollution Control Committees are empowered to levy environmental compensation. [2]",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p3-c1",
+        "solid_waste_management_rules_2026.pdf#p4-c0",
+        "solid_waste_management_rules_2026.pdf#p1-c2"
+      ],
+      "cited": [
+        "solid_waste_management_rules_2026.pdf#p3-c1",
+        "solid_waste_management_rules_2026.pdf#p4-c0"
+      ],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 785,
+      "output_tokens": 34,
+      "seconds": 15.1,
+      "evidence_in_prompt": true,
+      "cite_right_doc": true,
+      "cite_exact": true,
+      "category": "correct",
+      "refused": false,
+      "violations": [],
+      "facts_met": "2/2",
+      "contradictory": false
+    },
+    {
+      "id": "c08",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "informal",
+        "list"
+      ],
+      "question": "what kind of violations make someone pay environmental compensation",
+      "answer": "[1] The Solid Waste Management Rules, 2026 operationalize the \"polluter pays\" principle by attracting environmental compensation (EC) for defined non-compliances such as operating without registration/authorisation, false reporting, forged documents, and improper practices.",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p3-c1",
+        "solid_waste_management_rules_2026.pdf#p4-c0",
+        "solid_waste_management_rules_2026.pdf#p1-c2"
+      ],
+      "cited": [
+        "solid_waste_management_rules_2026.pdf#p3-c1"
+      ],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 781,
+      "output_tokens": 56,
+      "seconds": 5.4,
+      "evidence_in_prompt": true,
+      "cite_right_doc": true,
+      "cite_exact": true,
+      "category": "correct",
+      "refused": false,
+      "violations": [],
+      "facts_met": "2/2",
+      "contradictory": false
+    },
+    {
+      "id": "c09",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "numbers",
+        "two-part"
+      ],
+      "question": "Which waste facilities need a buffer zone, and who decides how big it is?",
+      "answer": "[1]\nThe Solid Waste Management Rules 2026 introduce graded criteria for development around solid waste processing/disposal facilities to facilitate faster land allocation. For facilities greater than 5 tons per day (TPD), a buffer zone is required within the total area allotted. The Central Pollution Control Board (CPCB) will specify the buffer size and permissible activities based on the facility's capacity and pollution load.\n\nI don't know based on the provided documents.",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p4-c3",
+        "solid_waste_management_rules_2026.pdf#p1-c2",
+        "solid_waste_management_rules_2026.pdf#p1-c3"
+      ],
+      "cited": [
+        "solid_waste_management_rules_2026.pdf#p4-c3"
+      ],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 739,
+      "output_tokens": 94,
+      "seconds": 18.6,
+      "evidence_in_prompt": true,
+      "cite_right_doc": true,
+      "cite_exact": true,
+      "category": "correct",
+      "refused": true,
+      "violations": [],
+      "facts_met": "2/2",
+      "contradictory": true
+    },
+    {
+      "id": "c10",
+      "by": "claude",
+      "type": "answer",
+      "tags": [],
+      "question": "What simple equation does the paper suggest for checking that waste numbers add up?",
+      "answer": "I don't know based on the provided documents.",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p1-c5",
+        "solid_waste_management_rules_2026.pdf#p2-c2",
+        "solid_waste_management_rules_2026.pdf#p1-c6"
+      ],
+      "cited": [],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 800,
+      "output_tokens": 11,
+      "seconds": 13.8,
+      "evidence_in_prompt": false,
+      "cite_right_doc": false,
+      "cite_exact": false,
+      "category": "retrieval_miss",
+      "refused": true,
+      "violations": [],
+      "facts_met": "0/2",
+      "contradictory": false
+    },
+    {
+      "id": "c11",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "table"
+      ],
+      "question": "Compared with the 2016 rules, how is monitoring done now?",
+      "answer": "[M2] The Solid Waste Management Rules 2026 establish a more compliance-driven framework with explicit duties, monitoring, and \"polluter pays\" compensation mechanisms. Monitoring is done through a central online portal and mandatory audits and online reporting. This is a change from the fragmented reporting and limited traceability mentioned in the SWM Rules 2016.",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p1-c4",
+        "solid_waste_management_rules_2026.pdf#p6-c2",
+        "solid_waste_management_rules_2026.pdf#p13-c3"
+      ],
+      "cited": [],
+      "bad_citations": [],
+      "malformed": [
+        "[M2]"
+      ],
+      "prompt_tokens": 755,
+      "output_tokens": 74,
+      "seconds": 17.5,
+      "evidence_in_prompt": true,
+      "cite_right_doc": false,
+      "cite_exact": false,
+      "category": "correct",
+      "refused": false,
+      "violations": [],
+      "facts_met": "2/2",
+      "contradictory": false
+    },
+    {
+      "id": "c12",
+      "by": "claude",
+      "type": "answer",
+      "tags": [],
+      "question": "How often do cities have to report progress on cleaning up old dumpsites?",
+      "answer": "[3] Cities have to report progress on cleaning up old dumpsites every quarter.",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p8-c4",
+        "solid_waste_management_rules_2026.pdf#p4-c1",
+        "solid_waste_management_rules_2026.pdf#p6-c0"
+      ],
+      "cited": [
+        "solid_waste_management_rules_2026.pdf#p6-c0"
+      ],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 618,
+      "output_tokens": 18,
+      "seconds": 10.8,
+      "evidence_in_prompt": true,
+      "cite_right_doc": true,
+      "cite_exact": true,
+      "category": "correct",
+      "refused": false,
+      "violations": [],
+      "facts_met": "1/1",
+      "contradictory": false
+    },
+    {
+      "id": "c13",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "numbers"
+      ],
+      "question": "What contamination level in dry recyclables counts as good enough for efficient recovery?",
+      "answer": "[3] Clean feedstock enables higher-order recycling pathways, reduces down-cycling, and stabilises secondary material markets—an essential condition for private-sector participation.\n\n[1] Bulk Generator Compliance Rate (%): Percentage of notified bulk waste generators achieving:\no On-site wet-waste processing (composting/bio-methanation), or\no Verified compliance with Extended Bulk Waste Generator Responsibility (EBWGR). Performance implication: Non-compliant bulk generators disproportionately contribute to mixed waste inflow and should be separately benchmarked.\n\n[2] Improved material recovery and recycling efficiency: On-site segregation and treatment prevent organic contamination of dry recyclables, thereby enhancing the quality, market value, and recyclability of paper, plastics, metals, and glass. This directly supports circular economy objectives by improving downstream recovery rates.\n\nI don't know based on the provided documents. [3] does not specify a contamination level for efficient recovery. [1] and [2] discuss contamination in the context of compliance and treatment, but do not provide a threshold for efficient recovery.",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p9-c3",
+        "solid_waste_management_rules_2026.pdf#p3-c0",
+        "solid_waste_management_rules_2026.pdf#p8-c0"
+      ],
+      "cited": [
+        "solid_waste_management_rules_2026.pdf#p8-c0",
+        "solid_waste_management_rules_2026.pdf#p9-c3",
+        "solid_waste_management_rules_2026.pdf#p3-c0"
+      ],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 766,
+      "output_tokens": 210,
+      "seconds": 23.0,
+      "evidence_in_prompt": true,
+      "cite_right_doc": true,
+      "cite_exact": true,
+      "category": "wrongly_refused",
+      "refused": true,
+      "violations": [],
+      "facts_met": "0/2",
+      "contradictory": true
+    },
+    {
+      "id": "c14",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "numbers"
+      ],
+      "question": "At what utilisation level does an MRF indicate problems further upstream?",
+      "answer": "[1] indicates that an MRF indicates problems further upstream when its utilisation level is below 70%.",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p10-c0",
+        "solid_waste_management_rules_2026.pdf#p5-c0",
+        "solid_waste_management_rules_2026.pdf#p9-c3"
+      ],
+      "cited": [
+        "solid_waste_management_rules_2026.pdf#p10-c0"
+      ],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 806,
+      "output_tokens": 24,
+      "seconds": 15.3,
+      "evidence_in_prompt": true,
+      "cite_right_doc": true,
+      "cite_exact": true,
+      "category": "correct",
+      "refused": false,
+      "violations": [],
+      "facts_met": "1/1",
+      "contradictory": false
+    },
+    {
+      "id": "c15",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "numbers"
+      ],
+      "question": "How is the incident rate for waste workers measured?",
+      "answer": "[3]\nThe incident rate for waste workers is measured as \"Recordable injuries or exposure incidents per 1,000 workers per annum.\" [3]",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p12-c0",
+        "solid_waste_management_rules_2026.pdf#p12-c1",
+        "solid_waste_management_rules_2026.pdf#p9-c3"
+      ],
+      "cited": [
+        "solid_waste_management_rules_2026.pdf#p9-c3"
+      ],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 712,
+      "output_tokens": 34,
+      "seconds": 13.6,
+      "evidence_in_prompt": true,
+      "cite_right_doc": true,
+      "cite_exact": false,
+      "category": "correct",
+      "refused": false,
+      "violations": [],
+      "facts_met": "1/1",
+      "contradictory": false
+    },
+    {
+      "id": "c16",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "cross-page"
+      ],
+      "question": "How must sanitary waste be handled, and why does it matter?",
+      "answer": "[1] The new framework introduces mandatory secure wrapping and labelling of sanitary waste. This is done to reduce vector attraction, pathogen transmission, and accidental exposure, particularly for informal waste handlers and sanitation workers. It also extends benefits to dignity, safety, and system professionalism, which are prerequisites for sustained compliance.\n\n[3] Health, Safety, and Occupational Risk Management SWM Rules, 2026 explicitly expand the compliance lens to include worker safety, a dimension historically under-reported in municipal systems. Recommended Indicators - Sanitary Waste Capture Rate (%): Percentage of sanitary waste safely segregated, collected, and disposed through authorised channels. - PPE Compliance Rate (%): Proportion of workers provided with and correctly using prescribed personal protective equipment at collection, transfer, processing, and disposal facilities. - Incident Frequency Rate: Recordable injuries or exposure incidents per 1,000 workers per annum. International alignment: These indicators mirror occupational safety benchmarks used in EU waste facilities and OECD reporting frameworks.\n\n[1] [3] Therefore, sanitary waste must be handled securely by being wrapped and clearly identified, reducing exposure risks and ensuring proper disposal. Proper handling of sanitary waste is crucial for infection control, worker safety, and system professionalism, which are essential for sustained compliance with the new framework.",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p7-c4",
+        "solid_waste_management_rules_2026.pdf#p1-c6",
+        "solid_waste_management_rules_2026.pdf#p12-c0"
+      ],
+      "cited": [
+        "solid_waste_management_rules_2026.pdf#p7-c4",
+        "solid_waste_management_rules_2026.pdf#p12-c0"
+      ],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 688,
+      "output_tokens": 258,
+      "seconds": 31.0,
+      "evidence_in_prompt": true,
+      "cite_right_doc": true,
+      "cite_exact": false,
+      "category": "correct",
+      "refused": false,
+      "violations": [],
+      "facts_met": "2/2",
+      "contradictory": false
+    },
+    {
+      "id": "c17",
+      "by": "claude",
+      "type": "answer",
+      "tags": [],
+      "question": "Why might the RDF fuel targets fail in practice?",
+      "answer": "[R1] Industrial utilisation of RDF — substitution targets fail in practice due to the engineering reality that RDF is only as good as segregation. When mixed waste is mechanically shredded into \"RDF-like\" material, it leads to high moisture, high chlorine, and high inert content, which negatively impacts the quality and effectiveness of RDF.\n\nI don't know based on the provided documents.",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p5-c1",
+        "solid_waste_management_rules_2026.pdf#p8-c3",
+        "solid_waste_management_rules_2026.pdf#p8-c2"
+      ],
+      "cited": [],
+      "bad_citations": [],
+      "malformed": [
+        "[R1]"
+      ],
+      "prompt_tokens": 626,
+      "output_tokens": 77,
+      "seconds": 14.9,
+      "evidence_in_prompt": true,
+      "cite_right_doc": false,
+      "cite_exact": false,
+      "category": "correct",
+      "refused": true,
+      "violations": [],
+      "facts_met": "1/1",
+      "contradictory": true
+    },
+    {
+      "id": "c18",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "informal",
+        "list"
+      ],
+      "question": "who all are responsible under swm 2026 apart from the municipality",
+      "answer": "[3] The documents mention that the Central Pollution Control Board is responsible for preparing the Environmental Compensation (EC) guidelines under the SWM 2026. Additionally, State Pollution Control Boards/Pollution Control Committees are empowered to levy Environmental Compensation. Therefore, apart from the municipality, the Central Pollution Control Board and State Pollution Control Boards/Pollution Control Committees are responsible under SWM 2026.",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p1-c4",
+        "solid_waste_management_rules_2026.pdf#p9-c1",
+        "solid_waste_management_rules_2026.pdf#p3-c1"
+      ],
+      "cited": [
+        "solid_waste_management_rules_2026.pdf#p3-c1"
+      ],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 705,
+      "output_tokens": 85,
+      "seconds": 13.4,
+      "evidence_in_prompt": false,
+      "cite_right_doc": true,
+      "cite_exact": false,
+      "category": "retrieval_miss",
+      "refused": false,
+      "violations": [],
+      "facts_met": "0/3",
+      "contradictory": false
+    },
+    {
+      "id": "c19",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "numbers",
+        "references"
+      ],
+      "question": "Under which notification number, and on what date, were the 2016 rules notified?",
+      "answer": "[3] The 2016 rules were notified under Notification S.O. 1357(E), 8 April 2016.",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p13-c3",
+        "solid_waste_management_rules_2026.pdf#p1-c2",
+        "solid_waste_management_rules_2026.pdf#p1-c4"
+      ],
+      "cited": [
+        "solid_waste_management_rules_2026.pdf#p1-c4"
+      ],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 743,
+      "output_tokens": 34,
+      "seconds": 13.9,
+      "evidence_in_prompt": true,
+      "cite_right_doc": true,
+      "cite_exact": false,
+      "category": "correct",
+      "refused": false,
+      "violations": [],
+      "facts_met": "2/2",
+      "contradictory": false
+    },
+    {
+      "id": "c20",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "premise"
+      ],
+      "question": "Why does SWM 2026 ban composting?",
+      "answer": "I don't know based on the provided documents.",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p6-c3",
+        "solid_waste_management_rules_2026.pdf#p13-c2",
+        "solid_waste_management_rules_2026.pdf#p1-c6"
+      ],
+      "cited": [],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 863,
+      "output_tokens": 11,
+      "seconds": 14.9,
+      "evidence_in_prompt": true,
+      "cite_right_doc": false,
+      "cite_exact": false,
+      "category": "wrongly_refused",
+      "refused": true,
+      "violations": [],
+      "facts_met": "0/1",
+      "contradictory": false
+    },
+    {
+      "id": "c21",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "premise",
+        "numbers"
+      ],
+      "question": "How much has the landfill fee for unsegregated waste been reduced under the new rules?",
+      "answer": "I don't know based on the provided documents. [1]",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p12-c6",
+        "solid_waste_management_rules_2026.pdf#p5-c2",
+        "solid_waste_management_rules_2026.pdf#p6-c3"
+      ],
+      "cited": [
+        "solid_waste_management_rules_2026.pdf#p12-c6"
+      ],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 768,
+      "output_tokens": 14,
+      "seconds": 13.2,
+      "evidence_in_prompt": true,
+      "cite_right_doc": true,
+      "cite_exact": false,
+      "category": "wrongly_refused",
+      "refused": true,
+      "violations": [],
+      "facts_met": "0/1",
+      "contradictory": true
+    },
+    {
+      "id": "c22",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "two-part"
+      ],
+      "question": "Where did Saurabh study engineering, and what was his CGPA?",
+      "answer": "[S1] Saurabh studied engineering at Theem College of Engineering, Palghar, Maharashtra, India. His CGPA was 8.53. [1]",
+      "prompt_ids": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c0",
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c5",
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c3"
+      ],
+      "cited": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c0"
+      ],
+      "bad_citations": [],
+      "malformed": [
+        "[S1]"
+      ],
+      "prompt_tokens": 710,
+      "output_tokens": 37,
+      "seconds": 13.9,
+      "evidence_in_prompt": true,
+      "cite_right_doc": true,
+      "cite_exact": true,
+      "category": "correct",
+      "refused": false,
+      "violations": [],
+      "facts_met": "2/2",
+      "contradictory": false
+    },
+    {
+      "id": "c23",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "informal",
+        "multi-item"
+      ],
+      "question": "which internship did saurabh do in 2022",
+      "answer": "[2] Saurabh Vishwakarma had an internship as a Data Science Intern at Yoshops.com from September 2022 to November 2022.",
+      "prompt_ids": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c4",
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c3",
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c5"
+      ],
+      "cited": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c3"
+      ],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 801,
+      "output_tokens": 38,
+      "seconds": 15.4,
+      "evidence_in_prompt": true,
+      "cite_right_doc": true,
+      "cite_exact": false,
+      "category": "correct",
+      "refused": false,
+      "violations": [],
+      "facts_met": "1/1",
+      "contradictory": false
+    },
+    {
+      "id": "c24",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "list"
+      ],
+      "question": "What machine learning models did Saurabh build during his internship at Yoshops?",
+      "answer": "[I don't have direct access to the specific section about Saurabh Vishwakarma's internship at Yoshops.com, but based on the information provided in [2], he developed predictive machine learning models, including linear regression, decision trees, and random forests, enabling data-driven decision-making for optimized outcomes. ]",
+      "prompt_ids": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c4",
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c5",
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c1"
+      ],
+      "cited": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c5"
+      ],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 690,
+      "output_tokens": 64,
+      "seconds": 11.4,
+      "evidence_in_prompt": true,
+      "cite_right_doc": true,
+      "cite_exact": false,
+      "category": "correct",
+      "refused": false,
+      "violations": [],
+      "facts_met": "3/3",
+      "contradictory": false
+    },
+    {
+      "id": "c25",
+      "by": "claude",
+      "type": "refuse",
+      "tags": [
+        "near-miss",
+        "numbers"
+      ],
+      "question": "What is the exact environmental compensation amount in rupees for forged documents?",
+      "answer": "I don't know based on the provided documents.",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p3-c1",
+        "solid_waste_management_rules_2026.pdf#p4-c0",
+        "solid_waste_management_rules_2026.pdf#p13-c3"
+      ],
+      "cited": [],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 753,
+      "output_tokens": 11,
+      "seconds": 4.7,
+      "category": "refused",
+      "refused": true,
+      "violations": [],
+      "facts_met": "0/0",
+      "contradictory": false
+    },
+    {
+      "id": "c26",
+      "by": "claude",
+      "type": "refuse",
+      "tags": [
+        "near-miss",
+        "numbers"
+      ],
+      "question": "By which year must every city reach 100% four-stream segregation?",
+      "answer": "I don't know based on the provided documents.",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p1-c6",
+        "solid_waste_management_rules_2026.pdf#p2-c1",
+        "solid_waste_management_rules_2026.pdf#p1-c3"
+      ],
+      "cited": [],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 671,
+      "output_tokens": 11,
+      "seconds": 6.2,
+      "category": "refused",
+      "refused": true,
+      "violations": [],
+      "facts_met": "0/0",
+      "contradictory": false
+    },
+    {
+      "id": "c27",
+      "by": "claude",
+      "type": "refuse",
+      "tags": [
+        "near-miss",
+        "numbers"
+      ],
+      "question": "How many material recovery facilities are there in India today?",
+      "answer": "I don't know based on the provided documents.",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p1-c4",
+        "solid_waste_management_rules_2026.pdf#p5-c0",
+        "solid_waste_management_rules_2026.pdf#p7-c5"
+      ],
+      "cited": [],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 675,
+      "output_tokens": 11,
+      "seconds": 7.7,
+      "category": "refused",
+      "refused": true,
+      "violations": [],
+      "facts_met": "0/0",
+      "contradictory": false
+    },
+    {
+      "id": "c28",
+      "by": "claude",
+      "type": "refuse",
+      "tags": [
+        "near-miss",
+        "numbers"
+      ],
+      "question": "How much municipal solid waste did India generate in 2025?",
+      "answer": "I don't know based on the provided documents. [3]",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p1-c4",
+        "solid_waste_management_rules_2026.pdf#p1-c2",
+        "solid_waste_management_rules_2026.pdf#p13-c4"
+      ],
+      "cited": [
+        "solid_waste_management_rules_2026.pdf#p13-c4"
+      ],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 755,
+      "output_tokens": 14,
+      "seconds": 9.4,
+      "category": "refused",
+      "refused": true,
+      "violations": [],
+      "facts_met": "0/0",
+      "contradictory": true
+    },
+    {
+      "id": "c29",
+      "by": "claude",
+      "type": "refuse",
+      "tags": [
+        "near-miss"
+      ],
+      "question": "Which Indian city has the best segregation rate under SWM 2026?",
+      "answer": "I don't know based on the provided documents.",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p1-c4",
+        "solid_waste_management_rules_2026.pdf#p13-c3",
+        "solid_waste_management_rules_2026.pdf#p9-c1"
+      ],
+      "cited": [],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 629,
+      "output_tokens": 11,
+      "seconds": 6.6,
+      "category": "refused",
+      "refused": true,
+      "violations": [],
+      "facts_met": "0/0",
+      "contradictory": false
+    },
+    {
+      "id": "c30",
+      "by": "claude",
+      "type": "refuse",
+      "tags": [
+        "near-miss",
+        "numbers"
+      ],
+      "question": "How much does an EBWGR certificate cost?",
+      "answer": "I don't know based on the provided documents.",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p2-c3",
+        "solid_waste_management_rules_2026.pdf#p12-c1",
+        "solid_waste_management_rules_2026.pdf#p3-c0"
+      ],
+      "cited": [],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 752,
+      "output_tokens": 11,
+      "seconds": 12.8,
+      "category": "refused",
+      "refused": true,
+      "violations": [],
+      "facts_met": "0/0",
+      "contradictory": false
+    },
+    {
+      "id": "c31",
+      "by": "claude",
+      "type": "refuse",
+      "tags": [
+        "near-miss"
+      ],
+      "question": "What was Saurabh's salary at A-1 Fence Products?",
+      "answer": "I don't know based on the provided documents.",
+      "prompt_ids": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c4",
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c5",
+        "solid_waste_management_rules_2026.pdf#p3-c0"
+      ],
+      "cited": [],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 908,
+      "output_tokens": 11,
+      "seconds": 6.4,
+      "category": "refused",
+      "refused": true,
+      "violations": [],
+      "facts_met": "0/0",
+      "contradictory": false
+    },
+    {
+      "id": "c32",
+      "by": "claude",
+      "type": "refuse",
+      "tags": [
+        "near-miss",
+        "numbers"
+      ],
+      "question": "What marks did Saurabh get in his 12th (PCMB)?",
+      "answer": "I don't know based on the provided documents. [1]",
+      "prompt_ids": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c0",
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c5",
+        "solid_waste_management_rules_2026.pdf#p1-c4"
+      ],
+      "cited": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c0"
+      ],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 752,
+      "output_tokens": 14,
+      "seconds": 5.8,
+      "category": "refused",
+      "refused": true,
+      "violations": [],
+      "facts_met": "0/0",
+      "contradictory": true
+    },
+    {
+      "id": "c33",
+      "by": "claude",
+      "type": "refuse",
+      "tags": [
+        "world-knowledge"
+      ],
+      "question": "Who is the current Union Environment Minister of India?",
+      "answer": "I don't know based on the provided documents.",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p13-c3",
+        "solid_waste_management_rules_2026.pdf#p1-c4",
+        "solid_waste_management_rules_2026.pdf#p9-c1"
+      ],
+      "cited": [],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 622,
+      "output_tokens": 11,
+      "seconds": 7.1,
+      "category": "refused",
+      "refused": true,
+      "violations": [],
+      "facts_met": "0/0",
+      "contradictory": false
+    },
+    {
+      "id": "c34",
+      "by": "claude",
+      "type": "refuse",
+      "tags": [
+        "world-knowledge",
+        "informal"
+      ],
+      "question": "what does IRI measure on roads",
+      "answer": "I don't know based on the provided documents.",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p6-c1",
+        "solid_waste_management_rules_2026.pdf#p4-c3",
+        "solid_waste_management_rules_2026.pdf#p9-c2"
+      ],
+      "cited": [],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 846,
+      "output_tokens": 11,
+      "seconds": 14.8,
+      "category": "refused",
+      "refused": true,
+      "violations": [],
+      "facts_met": "0/0",
+      "contradictory": false
+    },
+    {
+      "id": "c35",
+      "by": "claude",
+      "type": "refuse",
+      "tags": [
+        "world-knowledge"
+      ],
+      "question": "Who won the 2023 cricket world cup?",
+      "answer": "I don't know based on the provided documents.",
+      "prompt_ids": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c3",
+        "solid_waste_management_rules_2026.pdf#p9-c1",
+        "solid_waste_management_rules_2026.pdf#p12-c2"
+      ],
+      "cited": [],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 478,
+      "output_tokens": 11,
+      "seconds": 7.9,
+      "category": "refused",
+      "refused": true,
+      "violations": [],
+      "facts_met": "0/0",
+      "contradictory": false
+    },
+    {
+      "id": "c36",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "table"
+      ],
+      "question": "In the circular economy table, what does formally recognising MRFs achieve?",
+      "answer": "[3]\nFormally recognizing Material Recovery Facilities (MRFs) in the circular economy table achieves several outcomes. Firstly, MRFs are formally recognised as sorting facilities and may also act as deposition points for multiple waste streams, including special care and sanitary waste, for further processing. Secondly, it strengthens the middle of the chain in the solid waste management system. Thirdly, it improves the post-collection sorting quality by controlling contamination, separating polymer and paper grades, removing fines and inserts, and managing rejection. Lastly, it ensures operational safeguards to keep MRFs credible, such as strict incoming segregation checks, recorded rejection ratios, fire prevention protocols, and worker safety measures. [3]",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p7-c5",
+        "solid_waste_management_rules_2026.pdf#p8-c0",
+        "solid_waste_management_rules_2026.pdf#p5-c0"
+      ],
+      "cited": [
+        "solid_waste_management_rules_2026.pdf#p5-c0"
+      ],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 610,
+      "output_tokens": 139,
+      "seconds": 20.4,
+      "evidence_in_prompt": false,
+      "cite_right_doc": true,
+      "cite_exact": false,
+      "category": "retrieval_miss",
+      "refused": false,
+      "violations": [],
+      "facts_met": "0/1",
+      "contradictory": false
+    },
+    {
+      "id": "c37",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "table"
+      ],
+      "question": "According to the risk table, what happens to the environment if monitoring is weak?",
+      "answer": "According to Table 3 in [1], if monitoring is weak, false compliance will occur, leading to a negative environmental consequence of policy credibility erosion. [1]",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p9-c0",
+        "solid_waste_management_rules_2026.pdf#p8-c6",
+        "solid_waste_management_rules_2026.pdf#p8-c4"
+      ],
+      "cited": [
+        "solid_waste_management_rules_2026.pdf#p9-c0"
+      ],
+      "bad_citations": [],
+      "malformed": [],
+      "prompt_tokens": 637,
+      "output_tokens": 34,
+      "seconds": 11.9,
+      "evidence_in_prompt": true,
+      "cite_right_doc": true,
+      "cite_exact": true,
+      "category": "correct",
+      "refused": false,
+      "violations": [],
+      "facts_met": "1/1",
+      "contradictory": false
+    },
+    {
+      "id": "c38",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "table",
+        "informal"
+      ],
+      "question": "how often should ppe compliance be reported",
+      "answer": "[P3] Centralised online portal recommends that PPE compliance be reported monthly [3].",
+      "prompt_ids": [
+        "solid_waste_management_rules_2026.pdf#p12-c0",
+        "solid_waste_management_rules_2026.pdf#p12-c1",
+        "solid_waste_management_rules_2026.pdf#p4-c2"
+      ],
+      "cited": [
+        "solid_waste_management_rules_2026.pdf#p4-c2"
+      ],
+      "bad_citations": [],
+      "malformed": [
+        "[P3]"
+      ],
+      "prompt_tokens": 600,
+      "output_tokens": 19,
+      "seconds": 4.2,
+      "evidence_in_prompt": true,
+      "cite_right_doc": true,
+      "cite_exact": false,
+      "category": "correct",
+      "refused": false,
+      "violations": [],
+      "facts_met": "1/1",
+      "contradictory": false
+    }
+  ]
+}
