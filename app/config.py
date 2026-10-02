@@ -64,7 +64,8 @@ TABLE_MAX_AVG_CELL_CHARS = 200
 # Vector store (3.3)
 CHROMA_DIR = "data/chroma"      # inside data/, so it is already git-ignored
 CHROMA_COLLECTION = "docs"
-TOP_K = 3   
+
+TOP_K = 3   # Phase 4: top 5 fixed 4, broke 4, +64% time, caused the first hallucination (c32)
 
 # RAG answers (3.4)
 RAG_MAX_PROMPT_TOKENS = 3000    # ~45 s of prefill at worst; chunks are dropped beyond this
@@ -72,4 +73,7 @@ RAG_ANSWER_MAX_TOKENS = 300     # ~25 s of decode at worst
 
 # Prompt version (3.4). v1 = the original that scored answerable 3/4, refusals 4/4.
 # Change only after 13_rag.py experiment 3 shows a version that beats it.
-RAG_PROMPT_STYLE = "v3"
+RAG_PROMPT_STYLE = "v3"   # Phase 4 (44 q): v3 0.61 correct, citations 0.90 exact, 0 invented
+                          #                 v1 0.79 correct, citations 0.61 exact, 6 invented
+
+                          
