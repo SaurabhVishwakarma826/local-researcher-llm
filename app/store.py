@@ -54,7 +54,11 @@ def collection():
 
 
 def _file_hash(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()[:16]
+    """Fingerprint of the file AND the processing pipeline version. Without the version, a
+    change to ingest.py or chunk.py would leave old chunks in the store, silently, because
+    the PDF itself did not change. Bump config.INDEX_VERSION whenever those files change."""
+    version = str(getattr(config, "INDEX_VERSION", 1)).encode()
+    return hashlib.sha256(path.read_bytes() + b"|v" + version).hexdigest()[:16]
 
 
 def indexed_files() -> dict:

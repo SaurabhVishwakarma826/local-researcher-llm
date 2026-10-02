@@ -1,0 +1,374 @@
+{
+  "timestamp": "20261002_221103",
+  "kind": "retrieval",
+  "label": "captions",
+  "split": "dev",
+  "seconds": 7.8,
+  "config": {
+    "embed_model": "BAAI/bge-small-en-v1.5",
+    "chunk_max_tokens": 300,
+    "top_k": 3,
+    "n_chunks": 62,
+    "llm": "qwen2.5:3b",
+    "prompt_style": "v3",
+    "retrieval_mode": "hybrid",
+    "reranker": "minilm"
+  },
+  "summary": {
+    "answerable": {
+      "n": 4,
+      "hit@1": 1.0,
+      "hit@3": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0,
+      "mrr": 1.0
+    },
+    "seconds_per_question": {
+      "mean": 0.89,
+      "max": 1.516
+    },
+    "unfindable": [],
+    "by_author": {
+      "claude": {
+        "n": 4,
+        "hit@1": 1.0,
+        "hit@3": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "mrr": 1.0
+      }
+    },
+    "by_tag": {
+      "(untagged)": {
+        "n": 1,
+        "hit@1": 1.0,
+        "hit@3": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "mrr": 1.0
+      },
+      "multi-item": {
+        "n": 1,
+        "hit@1": 1.0,
+        "hit@3": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "mrr": 1.0
+      },
+      "numbers": {
+        "n": 1,
+        "hit@1": 1.0,
+        "hit@3": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "mrr": 1.0
+      },
+      "table": {
+        "n": 1,
+        "hit@1": 1.0,
+        "hit@3": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "mrr": 1.0
+      }
+    },
+    "threshold": {
+      "answerable_found_at_1": [
+        4.2836,
+        6.4976
+      ],
+      "refuse_best_scores": [
+        -11.2045,
+        -10.6106
+      ],
+      "refuse_above_lowest_answerable": 0,
+      "n_refuse": 4
+    }
+  },
+  "per_question": [
+    {
+      "id": "d01",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "multi-item"
+      ],
+      "question": "What projects has Saurabh built with Django?",
+      "seconds": 1.516,
+      "top_score": 4.2836,
+      "retrieved": [
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c5",
+          "score": 4.2836
+        },
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c2",
+          "score": -6.9672
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p8-c4",
+          "score": -11.2045
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p2-c2",
+          "score": -11.2109
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p5-c2",
+          "score": -11.2838
+        }
+      ],
+      "rank": 1,
+      "findable": true,
+      "evidence_chunks": [
+        "Saurabh_Vishwakarma_26052026.pdf#p1-c5"
+      ]
+    },
+    {
+      "id": "d02",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "numbers"
+      ],
+      "question": "What is the RDF substitution target for cement plants?",
+      "seconds": 0.838,
+      "top_score": 6.0264,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p5-c1",
+          "score": 6.0264
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p8-c3",
+          "score": 0.4873
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p8-c2",
+          "score": -5.4435
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p5-c0",
+          "score": -7.6079
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p9-c3",
+          "score": -9.5801
+        }
+      ],
+      "rank": 1,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p5-c1"
+      ]
+    },
+    {
+      "id": "d03",
+      "by": "claude",
+      "type": "answer",
+      "tags": [
+        "table"
+      ],
+      "question": "Into how many streams must waste be segregated under SWM 2026?",
+      "seconds": 0.848,
+      "top_score": 6.4976,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c6",
+          "score": 6.4976
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p8-c1",
+          "score": 4.2353
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p7-c3",
+          "score": 4.1355
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p7-c2",
+          "score": 3.5196
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p6-c2",
+          "score": 2.8226
+        }
+      ],
+      "rank": 1,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p1-c2",
+        "solid_waste_management_rules_2026.pdf#p1-c6",
+        "solid_waste_management_rules_2026.pdf#p6-c2"
+      ]
+    },
+    {
+      "id": "d04",
+      "by": "claude",
+      "type": "answer",
+      "tags": [],
+      "question": "What can local authorities in hilly areas charge tourists?",
+      "seconds": 0.781,
+      "top_score": 4.9534,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p6-c1",
+          "score": 4.9534
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p2-c3",
+          "score": -11.0848
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p3-c1",
+          "score": -11.1427
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p2-c2",
+          "score": -11.1725
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c4",
+          "score": -11.2123
+        }
+      ],
+      "rank": 1,
+      "findable": true,
+      "evidence_chunks": [
+        "solid_waste_management_rules_2026.pdf#p6-c1"
+      ]
+    },
+    {
+      "id": "d05",
+      "by": "claude",
+      "type": "refuse",
+      "tags": [
+        "world-knowledge"
+      ],
+      "question": "What is the capital of France?",
+      "seconds": 0.737,
+      "top_score": -11.0684,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p6-c3",
+          "score": -11.0684
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c2",
+          "score": -11.0784
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p11-c0",
+          "score": -11.0977
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p2-c2",
+          "score": -11.1158
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p8-c4",
+          "score": -11.1361
+        }
+      ]
+    },
+    {
+      "id": "d06",
+      "by": "claude",
+      "type": "refuse",
+      "tags": [
+        "world-knowledge"
+      ],
+      "question": "What is the boiling point of water?",
+      "seconds": 0.718,
+      "top_score": -10.9832,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p2-c2",
+          "score": -10.9832
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p2-c1",
+          "score": -11.1255
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p7-c1",
+          "score": -11.1304
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p9-c1",
+          "score": -11.1571
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c6",
+          "score": -11.1695
+        }
+      ]
+    },
+    {
+      "id": "d07",
+      "by": "claude",
+      "type": "refuse",
+      "tags": [
+        "world-knowledge"
+      ],
+      "question": "Who created ArcFace?",
+      "seconds": 0.83,
+      "top_score": -10.6106,
+      "retrieved": [
+        {
+          "id": "Saurabh_Vishwakarma_26052026.pdf#p1-c5",
+          "score": -10.6106
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c1",
+          "score": -11.0911
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c0",
+          "score": -11.0977
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p4-c1",
+          "score": -11.1663
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p12-c5",
+          "score": -11.1836
+        }
+      ]
+    },
+    {
+      "id": "d08",
+      "by": "claude",
+      "type": "refuse",
+      "tags": [
+        "wrong-file"
+      ],
+      "question": "What projects has Saurabh built with Django?",
+      "seconds": 0.854,
+      "top_score": -11.2045,
+      "retrieved": [
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p8-c4",
+          "score": -11.2045
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p2-c2",
+          "score": -11.2109
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p3-c0",
+          "score": -11.234
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p5-c2",
+          "score": -11.2838
+        },
+        {
+          "id": "solid_waste_management_rules_2026.pdf#p1-c4",
+          "score": -11.2903
+        }
+      ]
+    }
+  ]
+}

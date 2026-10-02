@@ -76,4 +76,21 @@ RAG_ANSWER_MAX_TOKENS = 300     # ~25 s of decode at worst
 RAG_PROMPT_STYLE = "v3"   # Phase 4 (44 q): v3 0.61 correct, citations 0.90 exact, 0 invented
                           #                 v1 0.79 correct, citations 0.61 exact, 6 invented
 
-                          
+# Retrieval mode (Phase 5). "dense" = embeddings only (the Phase 4 baseline).
+# Change only after the harness shows a better hit@3.
+RETRIEVAL_MODE = "hybrid"
+HYBRID_POOL = 20    # how many results each method contributes before fusing
+RRF_K = 60          # standard RRF constant: 1/(60 + rank)
+
+# Reranking (5.2). None = off. Turn on only after the harness shows a better hit@3
+# that is worth the extra time per question.
+RERANKER = "minilm"   # 5.2: hit@3 0.88 -> 0.94, +0.3 s/question. bge: same hit@3, 2.5 s, hurt tables
+RERANK_POOL = 10    # hybrid's hit@10 is 1.00: every answer is somewhere in its top 10
+RERANKERS = {
+    "minilm": "cross-encoder/ms-marco-MiniLM-L-6-v2",   # ~90 MB, fast
+    "bge": "BAAI/bge-reranker-base",                    # ~1.1 GB, slower
+}
+
+# Bump this whenever ingest.py or chunk.py changes, so the store re-indexes automatically.
+# 1 = up to Phase 5.1; 2 = line-level table exclusion + captions as table headings (5.2)
+INDEX_VERSION = 2

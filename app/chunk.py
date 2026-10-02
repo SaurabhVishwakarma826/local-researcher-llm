@@ -10,6 +10,7 @@ Rules:
   - Tables stay whole; a big table is split by ROWS with its header repeated.
   - Every chunk starts with its section heading, so it still says what it is about.
   - ALL-CAPS lines are headings even with no blank line after them (q9).
+  - A "Table N: ..." caption directly above a table becomes that table's heading (5.2, c36).
   - Headings carry across page breaks (q6: page 6 started mid-section and lost
     its heading "…legacy waste remediation", so the question could not find it).
   - Oversized paragraphs are split by sentence, then by tokens, so no chunk can
@@ -33,6 +34,10 @@ class Chunk:
 
 
 SENT_END = re.compile(r"(?<=[.!?])\s+(?=[A-Z(\"“])")
+
+# "Table 2: Circular Economy Enablers ..." directly above a table becomes that table's
+# heading (5.2: c36's table chunk had heading '' so nothing said what the table was about).
+_CAPTION = re.compile(r"^(table|figure)\s*\d+\b", re.IGNORECASE)
 
 
 # ---------------------------------------------------------------------------
@@ -70,6 +75,9 @@ def _units(text: str) -> list:
                 i += 1
                 rows.append(lines[i].strip())
             units.append({"kind": "table", "text": "\n".join(rows), "section": section})
+        elif _CAPTION.match(line):
+            flush()
+            cur = {"kind": "caption", "text": line, "section": section}
         elif _is_caps_heading(line):
             flush()
             section += 1                  # a caps heading always starts a new section
@@ -81,7 +89,17 @@ def _units(text: str) -> list:
             cur["text"] += " " + line
         i += 1
     flush()
-    return units
+
+    # Attach a caption to the table right after it; a caption with no table is ordinary text.
+    out = []
+    for u in units:
+        if u["kind"] == "table" and out and out[-1]["kind"] == "caption":
+            u["caption"] = out.pop()["text"]
+        out.append(u)
+    for u in out:
+        if u["kind"] == "caption":
+            u["kind"] = "para"
+    return out
 
 
 def _is_heading(u) -> bool:
@@ -174,7 +192,10 @@ def _chunk_page(text: str, limit: int, carry: str) -> tuple:
                 if cur:
                     out.append((head, "\n".join(cur)))
                     cur, cur_n = [], 0
-                out += [(head, part) for part in _split_table(u["text"], budget)]
+                cap = u.get("caption", "")
+                thead = f"{head} / {cap}" if head and cap else (cap or head)
+                tbudget = limit - (tokens.count_text(thead) + 1 if thead else 0)
+                out += [(thead, part) for part in _split_table(u["text"], tbudget)]
                 continue
             for piece in _split_long(u["text"], budget):
                 n = tokens.count_text(piece)

@@ -25,7 +25,7 @@ import re
 import sys
 from dataclasses import dataclass
 
-from app import config, llm, store, tokens
+from app import config, llm, retrieve, tokens
 from app.prompt import sanitize
 
 REFUSAL = "I don't know based on the provided documents."
@@ -124,8 +124,10 @@ def answer_from_hits(question: str, hits: list, style: str = None) -> Answer:
                   prompt_tokens=s["prompt_tokens"], output_tokens=s.get("output_tokens", 0), seconds=s["total_s"], messages=msgs, style=style)
 
 
-def answer(question: str, k: int = None, source: str = None, style: str = None) -> Answer:
-    return answer_from_hits(question, store.search(question, k=k, source=source), style)
+def answer(question: str, k: int = None, source: str = None, style: str = None,
+           mode: str = None, reranker: str = "config") -> Answer:
+    hits = retrieve.search(question, k=k, source=source, mode=mode, reranker=reranker)
+    return answer_from_hits(question, hits, style)
 
 
 def print_answer(a: Answer, show_prompt: bool = False):

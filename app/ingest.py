@@ -147,28 +147,41 @@ def extract_page(page, furniture: set, report: Report):
         else:
             report.tables_rejected += 1
 
-    # Body = every text block NOT inside a kept table (so table text isn't included twice).
-    blocks = [b for b in page.get_text("blocks") if b[6] == 0]
-    body_blocks = [b for b in blocks
-                   if not any(_inside(pymupdf.Rect(b[:4]), r) for r in table_rects)]
+    # Body = every text LINE not inside a kept table (so table text isn't included twice).
+    # Line by line, not block by block: these PDFs store a table's caption and its header
+    # row as ONE block whose centre falls inside the table, so dropping whole blocks
+    # silently deleted 3 of 5 captions (found in 5.2, tracing why c36 failed).
+    body_blocks = []                                  # (bottom y of kept lines, text)
+    for b in page.get_text("dict")["blocks"]:
+        if b.get("type") != 0:                        # image block
+            continue
+        kept, bottom = [], None
+        for line in b["lines"]:
+            r = pymupdf.Rect(line["bbox"])
+            if any(_inside(r, t) for t in table_rects):
+                continue
+            kept.append("".join(sp["text"] for sp in line["spans"]))
+            bottom = r.y1 if bottom is None else max(bottom, r.y1)
+        if kept:
+            body_blocks.append((bottom, "\n".join(kept) + "\n"))
 
     # Put each table where it sits on the page: right after the lowest text block that
     # ends above the table's top edge. (Appending tables at the end separated page 6's
     # table from its heading.) -1 means "before all text".
     after = {}
     for rect, md in zip(table_rects, tables_md):
-        above = [i for i, b in enumerate(body_blocks) if b[3] <= rect.y0 + 2]
-        idx = max(above, key=lambda i: body_blocks[i][3]) if above else -1
+        above = [i for i, (bottom, _) in enumerate(body_blocks) if bottom <= rect.y0 + 2]
+        idx = max(above, key=lambda i: body_blocks[i][0]) if above else -1
         after.setdefault(idx, []).append(md)
 
     def table_part(md):
         return f"\n[Table]\n{md}\n\n"
 
     parts = [table_part(md) for md in after.get(-1, [])]
-    for i, b in enumerate(body_blocks):
+    for i, (_, text) in enumerate(body_blocks):
         # Blocks already end with a line break. Joining them with ANOTHER one created
         # blank lines in the middle of sentences (page 5), so we join with nothing.
-        parts.append(b[4] if b[4].endswith("\n") else b[4] + "\n")
+        parts.append(text)
         for md in after.get(i, []):
             parts.append(table_part(md))
 

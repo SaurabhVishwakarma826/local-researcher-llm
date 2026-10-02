@@ -1,8 +1,9 @@
 """
 eval/run_eval.py — the evaluation harness.
 
-    python eval/run_eval.py retrieval [--split dev] [--label NAME]          # seconds
-    python eval/run_eval.py answer --style v3 [--k 5] [--label NAME]        # ~10 min, needs Ollama
+    python eval/run_eval.py retrieval [--mode hybrid] [--rerank bge] [--split dev] [--label NAME]
+    python eval/run_eval.py answer --style v3 [--mode hybrid] [--rerank bge] [--k 5] [--label NAME]
+      --rerank none   turns reranking off even if config.RERANKER is set
     python eval/run_eval.py rescore NAME_OR_FILE                            # seconds, no Ollama
     python eval/run_eval.py compare A B                                     # seconds
 
@@ -25,7 +26,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from app import config, llm, rag, store  # noqa: E402
+from app import config, llm, rag, retrieve, store  # noqa: E402
 
 GOLDEN = ROOT / "eval" / "golden.jsonl"
 RESULTS = ROOT / "eval" / "results"
@@ -56,15 +57,18 @@ def _pct(xs, p: float) -> float:
 # ===========================================================================
 # Retrieval (4.2)
 # ===========================================================================
-def retrieval_rows(qs: list) -> list:
+def retrieval_rows(qs: list, mode: str, reranker) -> list:
     everything = store.collection().get(include=["documents", "metadatas"])
     chunks = [(i, norm(d), m) for i, d, m in
               zip(everything["ids"], everything["documents"], everything["metadatas"])]
     rows = []
     for q in qs:
-        hits = store.search(q["question"], k=max(KS), source=q.get("only_source"))
+        t0 = time.time()
+        hits = retrieve.search(q["question"], k=max(KS), source=q.get("only_source"),
+                               mode=mode, reranker=reranker)
         row = {"id": q["id"], "by": q.get("by", "?"), "type": q["type"], "tags": q.get("tags", []),
-               "question": q["question"], "top_score": round(hits[0].score, 4) if hits else None,
+               "question": q["question"], "seconds": round(time.time() - t0, 3),
+               "top_score": round(hits[0].score, 4) if hits else None,
                "retrieved": [{"id": h.id, "score": round(h.score, 4)} for h in hits[:5]]}
         if q["type"] == "answer":
             ev = norm(q["evidence"])
@@ -91,8 +95,10 @@ def retrieval_summary(rows: list) -> dict:
         for t in r["tags"] or ["(untagged)"]:
             by_tag[t].append(r)
     found1 = [r["top_score"] for r in ans if r["rank"] == 1]
+    secs = [r.get("seconds", 0) for r in rows]
     return {
         "answerable": block(ans),
+        "seconds_per_question": {"mean": round(_mean(secs), 3), "max": round(max(secs), 3) if secs else 0},
         "unfindable": [r["id"] for r in ans if not r["findable"]],
         "by_author": {a: block(rs) for a, rs in sorted(by_author.items())},
         "by_tag": {t: block(rs) for t, rs in sorted(by_tag.items())},
@@ -110,6 +116,9 @@ def print_retrieval(s: dict, rows: list):
     print(f"\nANSWERABLE QUESTIONS: {a['n']}")
     print("  " + "   ".join(f"hit@{k} {a[f'hit@{k}']:.2f}" for k in KS) + f"   MRR {a['mrr']:.2f}")
     print(f"  (we currently send top {config.TOP_K} chunks to Qwen)")
+    sp = s.get("seconds_per_question")
+    if sp:
+        print(f"  retrieval time per question: mean {sp['mean']:.2f}s, max {sp['max']:.2f}s")
     print("\nBY AUTHOR")
     for who, b in s["by_author"].items():
         print(f"  {who:<9} n={b['n']:<3} hit@3 {b['hit@3']:.2f}   MRR {b['mrr']:.2f}")
@@ -182,10 +191,11 @@ def classify(q: dict, text: str, evidence_in_prompt: bool, n_cited: int) -> dict
             "facts_met": f"{sum(met)}/{len(met)}", "contradictory": contradictory}
 
 
-def answer_rows(qs: list, style: str, k: int) -> list:
+def answer_rows(qs: list, style: str, k: int, mode: str, reranker) -> list:
     rows = []
     for n, q in enumerate(qs, 1):
-        a = rag.answer(q["question"], k=k, source=q.get("only_source"), style=style)
+        a = rag.answer(q["question"], k=k, source=q.get("only_source"), style=style,
+                       mode=mode, reranker=reranker)
         row = {"id": q["id"], "by": q.get("by", "?"), "type": q["type"], "tags": q.get("tags", []),
                "question": q["question"], "answer": a.text,
                "prompt_ids": [h.id for h in a.hits], "cited": [h.id for h in a.cited],
@@ -277,7 +287,9 @@ def save(kind: str, label: str, split: str, summary: dict, rows: list, seconds: 
     path = RESULTS / f"{stamp}_{kind}{'_' + label if label else ''}.json"
     base = {"embed_model": config.EMBED_MODEL_ID, "chunk_max_tokens": config.CHUNK_MAX_TOKENS,
             "top_k": config.TOP_K, "n_chunks": store.collection().count(),
-            "llm": config.LLM_MODEL, "prompt_style": getattr(config, "RAG_PROMPT_STYLE", None)}
+            "llm": config.LLM_MODEL, "prompt_style": getattr(config, "RAG_PROMPT_STYLE", None),
+            "retrieval_mode": getattr(config, "RETRIEVAL_MODE", "dense"),
+            "reranker": getattr(config, "RERANKER", None)}
     base.update(cfg or {})
     payload = {"timestamp": stamp, "kind": kind, "label": label, "split": split,
                "seconds": round(seconds, 1), "config": base, "summary": summary, "per_question": rows}
@@ -429,12 +441,19 @@ def main():
     qs = load_golden(split)
     print(f"{len(qs)} questions ({split} split), {store.collection().count()} chunks in the store")
 
+    mode = args[args.index("--mode") + 1] if "--mode" in args else config.RETRIEVAL_MODE
+    reranker = args[args.index("--rerank") + 1] if "--rerank" in args else getattr(config, "RERANKER", None)
+    reranker = None if reranker in (None, "none") else reranker
+    print(f"retrieval mode: {mode}, reranker: {reranker or 'off'}")
     t0 = time.time()
     if kind == "retrieval":
-        rows = retrieval_rows(qs)
+        if reranker:
+            print(f"loading reranker {reranker!r} (the first time downloads it)...")
+            retrieve.rerank("warm up", [store.Hit("x", "warm up", "x", 0, "", 0.0)], 1, reranker)
+        rows = retrieval_rows(qs, mode, reranker)
         summary = retrieval_summary(rows)
         print_retrieval(summary, rows)
-        cfg = {}
+        cfg = {"retrieval_mode": mode, "reranker": reranker}
     else:
         style = args[args.index("--style") + 1] if "--style" in args else config.RAG_PROMPT_STYLE
         k = int(args[args.index("--k") + 1]) if "--k" in args else config.TOP_K
@@ -442,10 +461,10 @@ def main():
             sys.exit(f"Ollama is not running at {config.OLLAMA_HOST}. Start it with: ollama serve")
         llm.chat([{"role": "user", "content": "hi"}], num_predict=1)       # warm up
         print(f"style {style}, top-{k} chunks. About {len(qs) * 12 // 60} min. Progress:")
-        rows = answer_rows(qs, style, k)
+        rows = answer_rows(qs, style, k, mode, reranker)
         summary = answer_summary(rows)
         print_answers(summary, rows)
-        cfg = {"prompt_style": style, "top_k": k}
+        cfg = {"prompt_style": style, "top_k": k, "retrieval_mode": mode, "reranker": reranker}
     dt = time.time() - t0
     path = save(kind, label, split, summary, rows, dt, cfg)
     print(f"\n{dt:.0f}s.  Saved: {path.relative_to(ROOT)}")
