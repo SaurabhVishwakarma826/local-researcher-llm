@@ -77,6 +77,18 @@ def chat(messages, sampling=None, fmt=None, num_predict=None):
     return d["message"]["content"], _stats(d)
 
 
+def chat_message(messages, tools=None, sampling=None, num_predict=None):
+    """Like chat(), but returns the FULL assistant message, so tool calls are visible.
+    tools: list of JSON schemas (Phase 6). Returns (message dict, stats)."""
+    body = _body(messages, sampling, num_predict, False)
+    if tools:
+        body["tools"] = tools
+    r = requests.post(f"{config.OLLAMA_HOST}/api/chat", json=body, timeout=1800)
+    r.raise_for_status()
+    d = r.json()
+    return d["message"], _stats(d)
+
+
 def stream_chat(messages, on_token, sampling=None, num_predict=None):
     """Streams the answer, calling on_token(piece) as each piece arrives.
     Returns (full_text, stats) at the end."""
