@@ -94,3 +94,11 @@ RERANKERS = {
 # Bump this whenever ingest.py or chunk.py changes, so the store re-indexes automatically.
 # 1 = up to Phase 5.1; 2 = line-level table exclusion + captions as table headings (5.2)
 INDEX_VERSION = 2
+
+# Agent (6.2)
+AGENT_MAX_STEPS = 5           # model calls with tools before a forced final answer
+AGENT_MAX_REPEATS = 1         # identical tool call allowed once; again -> error observation
+AGENT_MAX_TOKENS = 300        # answer length per model call
+AGENT_RESULT_MAX_CHARS = 4000 # longer tool results are cut, so one search can't flood num_ctx
+
+TOOL_RETRIES = 2   # 6.2: temporary tool failures are retried by our code before the model hears
