@@ -1,0 +1,265 @@
+{
+  "timestamp": "20261005_133027",
+  "kind": "agent",
+  "mode": "workflow",
+  "label": "wf",
+  "today": "2026-10-05",
+  "summary": {
+    "correct": 5,
+    "n": 11,
+    "wrong_order": 3,
+    "wrong_answer": 1,
+    "flagged_answers": 3,
+    "mean_calls": 2.9,
+    "mean_seconds": 17.3
+  },
+  "per_case": [
+    {
+      "id": "a01",
+      "kind": "search+calc",
+      "question": "What RDF substitution percentage do the SWM 2026 rules finally reach? If a cement plant burns 2,400 tonnes of fuel a year, how many tonnes would be RDF at that level?",
+      "expect": [
+        360
+      ],
+      "answer": "The SWM 2026 rules finally reach a 15% RDF substitution percentage. If a cement plant burns 2,400 tonnes of fuel a year, at that level, 360 tonnes would be RDF.\n\n[Warning: 15 did not come from the documents, a computed result or the question. Treat as unverified.]",
+      "plan": "route: math",
+      "model_calls": 3,
+      "seconds": 12.7,
+      "max_prompt_tokens": 135,
+      "stopped": "answered",
+      "ok": false,
+      "why": [
+        "missing tool",
+        "wrong order"
+      ],
+      "used": [
+        "calculator"
+      ],
+      "flagged": [
+        15.0
+      ]
+    },
+    {
+      "id": "a02",
+      "kind": "search+calc",
+      "question": "At the STARTING RDF substitution percentage in the SWM 2026 rules, how many tonnes of RDF would a plant burning 2,400 tonnes of fuel a year use?",
+      "expect": [
+        120
+      ],
+      "answer": "At the STARTING RDF substitution percentage in the SWM 2026 rules, a plant burning 2,400 tonnes of fuel a year would use 360 tonnes of RDF.",
+      "plan": "route: math",
+      "model_calls": 3,
+      "seconds": 13.4,
+      "max_prompt_tokens": 131,
+      "stopped": "answered",
+      "ok": false,
+      "why": [
+        "wrong answer",
+        "missing tool",
+        "wrong order"
+      ],
+      "used": [
+        "calculator"
+      ],
+      "flagged": []
+    },
+    {
+      "id": "a03",
+      "kind": "search+calc",
+      "question": "A hostel generates 40 kg of waste a day. How many more kg per day could it generate before it counts as a bulk waste generator under SWM 2026?",
+      "expect": [
+        60
+      ],
+      "answer": "The hostel could generate an additional 60 kg of waste per day before it counts as a bulk waste generator under SWM 2026.",
+      "plan": "route: math",
+      "model_calls": 3,
+      "seconds": 12.1,
+      "max_prompt_tokens": 123,
+      "stopped": "answered",
+      "ok": false,
+      "why": [
+        "missing tool",
+        "wrong order"
+      ],
+      "used": [
+        "calculator"
+      ],
+      "flagged": []
+    },
+    {
+      "id": "a04",
+      "kind": "search+calc",
+      "question": "An MRF designed for 200 TPD actually processes 130 TPD. What is its utilisation, and is it below the level the paper says indicates upstream problems?",
+      "expect": [
+        65,
+        0.65
+      ],
+      "answer": "The utilisation of the MRF, based on the given computation, is 0.65 or 65%. The paper suggests that a utilisation level below a certain threshold indicates upstream problems. Since the utilisation is below this threshold, it is possible that the MRF is experiencing upstream issues.\n\n[Warning: 65 did not come from the documents, a computed result or the question. Treat as unverified.]",
+      "plan": "route: math",
+      "model_calls": 3,
+      "seconds": 14.3,
+      "max_prompt_tokens": 127,
+      "stopped": "answered",
+      "ok": false,
+      "why": [
+        "missing tool"
+      ],
+      "used": [
+        "calculator"
+      ],
+      "flagged": [
+        65.0
+      ]
+    },
+    {
+      "id": "a05",
+      "kind": "search+calc",
+      "question": "A 500 kg sample of dry recyclables contains 75 kg of impurities. What is its contamination rate, and does it meet the paper's best-practice target?",
+      "expect": [
+        15,
+        0.15
+      ],
+      "answer": "The contamination rate of the dry recyclables sample is 15%, as calculated by (75 kg / 500 kg) * 100 = 15%. \n\nHowever, without specific information on the best-practice target contamination rate for the paper, it's not possible to determine if it meets the target.\n\n[Warning: 15, 100 did not come from the documents, a computed result or the question. Treat as unverified.]",
+      "plan": "route: math",
+      "model_calls": 4,
+      "seconds": 19.0,
+      "max_prompt_tokens": 154,
+      "stopped": "answered",
+      "ok": false,
+      "why": [
+        "missing tool"
+      ],
+      "used": [
+        "calculator"
+      ],
+      "flagged": [
+        15.0,
+        100.0
+      ]
+    },
+    {
+      "id": "a06",
+      "kind": "search+calc",
+      "question": "What was Saurabh's CGPA in engineering? Express it as a percentage of 10.",
+      "expect": [
+        85.3
+      ],
+      "answer": "85.3%",
+      "plan": "route: documents, math",
+      "model_calls": 3,
+      "seconds": 25.5,
+      "max_prompt_tokens": 597,
+      "stopped": "answered",
+      "ok": true,
+      "why": [],
+      "used": [
+        "search_documents",
+        "calculator"
+      ],
+      "flagged": []
+    },
+    {
+      "id": "a07",
+      "kind": "dates",
+      "question": "How many days are there between today and 1 April 2027?",
+      "expect": [
+        178
+      ],
+      "answer": "There are 178 days between 2026-10-05 and 1 April 2027.",
+      "plan": "route: dates",
+      "model_calls": 3,
+      "seconds": 14.5,
+      "max_prompt_tokens": 120,
+      "stopped": "answered",
+      "ok": true,
+      "why": [],
+      "used": [
+        "current_date",
+        "days_between"
+      ],
+      "flagged": []
+    },
+    {
+      "id": "a08",
+      "kind": "search+dates",
+      "question": "As of today, for how many days have the SWM 2026 rules been in force?",
+      "expect": [
+        187
+      ],
+      "answer": "As of today, the Solid Waste Management Rules 2026 have been in force for 187 days.",
+      "plan": "route: documents, dates",
+      "model_calls": 3,
+      "seconds": 30.4,
+      "max_prompt_tokens": 729,
+      "stopped": "answered",
+      "ok": true,
+      "why": [],
+      "used": [
+        "search_documents",
+        "current_date",
+        "days_between"
+      ],
+      "flagged": []
+    },
+    {
+      "id": "a09",
+      "kind": "one tool",
+      "question": "What is 23.7% of 9,845?",
+      "expect": [
+        2333.265
+      ],
+      "answer": "The computed result for 9845 * 0.237 is 2333.265. Therefore, 23.7% of 9,845 is 2333.265.",
+      "plan": "route: math",
+      "model_calls": 3,
+      "seconds": 14.8,
+      "max_prompt_tokens": 110,
+      "stopped": "answered",
+      "ok": true,
+      "why": [],
+      "used": [
+        "calculator"
+      ],
+      "flagged": []
+    },
+    {
+      "id": "a10",
+      "kind": "one tool",
+      "question": "According to the SWM 2026 paper, what may MRFs also act as, besides sorting facilities?",
+      "expect": [
+        "deposition point"
+      ],
+      "answer": "According to the SWM 2026 paper, MRFs may also act as deposition points for multiple waste streams, including special care and sanitary waste, for further processing.",
+      "plan": "route: documents",
+      "model_calls": 2,
+      "seconds": 18.0,
+      "max_prompt_tokens": 710,
+      "stopped": "answered",
+      "ok": true,
+      "why": [],
+      "used": [
+        "search_documents"
+      ],
+      "flagged": []
+    },
+    {
+      "id": "a11",
+      "kind": "no tool",
+      "question": "Hi! What can you help me with?",
+      "expect": [],
+      "answer": "I can help you understand the new solid waste management rules introduced in 2026, including mandatory secure wrapping and labelling of sanitary waste, separate storage and collection protocols, and the routing of special-care waste to trained agencies to reduce occupational exposure risks and prevent cross-contamination.",
+      "plan": "route: documents",
+      "model_calls": 2,
+      "seconds": 15.2,
+      "max_prompt_tokens": 393,
+      "stopped": "answered",
+      "ok": false,
+      "why": [
+        "used a tool needlessly"
+      ],
+      "used": [
+        "search_documents"
+      ],
+      "flagged": []
+    }
+  ]
+}

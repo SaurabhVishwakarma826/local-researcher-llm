@@ -360,6 +360,17 @@ def compare(ref_a: str, ref_b: str, split: str):
     if A["kind"] != B["kind"]:
         sys.exit(f"Cannot compare a {A['kind']} run with a {B['kind']} run")
     print(f"A = {A['_file']}\n    {A['config']}\nB = {B['_file']}\n    {B['config']}\n")
+    # One variable at a time: if several settings differ, the comparison cannot say which
+    # one caused the change (6.2: a run labelled 'v1_7b' was really v3 + 7B).
+    ignore = {"n_chunks", "rescored_from"}
+    diffs = sorted(k for k in set(A["config"]) | set(B["config"])
+                   if k not in ignore and A["config"].get(k) != B["config"].get(k))
+    if len(diffs) > 1:
+        print(f"!! WARNING: these runs differ in {len(diffs)} settings: "
+              + ", ".join(f"{k} ({A['config'].get(k)} -> {B['config'].get(k)})" for k in diffs))
+        print("!! Any change below cannot be attributed to one of them.\n")
+    elif diffs:
+        print(f"Only difference: {diffs[0]} ({A['config'].get(diffs[0])} -> {B['config'].get(diffs[0])})\n")
     if A["kind"] == "answer":
         # Both sides scored with the SAME checks, or golden-set edits show up as fake flips.
         for run in (A, B):

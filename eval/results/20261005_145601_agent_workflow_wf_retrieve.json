@@ -1,0 +1,255 @@
+{
+  "timestamp": "20261005_145601",
+  "kind": "agent",
+  "mode": "workflow",
+  "label": "wf_retrieve",
+  "today": "2026-10-05",
+  "summary": {
+    "correct": 9,
+    "n": 11,
+    "wrong_order": 0,
+    "wrong_answer": 1,
+    "flagged_answers": 1,
+    "mean_calls": 2.8,
+    "mean_seconds": 28.2
+  },
+  "per_case": [
+    {
+      "id": "a01",
+      "kind": "search+calc",
+      "question": "What RDF substitution percentage do the SWM 2026 rules finally reach? If a cement plant burns 2,400 tonnes of fuel a year, how many tonnes would be RDF at that level?",
+      "expect": [
+        360
+      ],
+      "answer": "The SWM 2026 rules finally reach a 15% RDF substitution target. If a cement plant burns 2,400 tonnes of fuel a year, at the 15% RDF substitution level, 360 tonnes of RDF would be burned annually.\n\n[Warning: 360 did not come from the documents, a computed result or the question. Treat as unverified.]",
+      "plan": "route: documents, math",
+      "model_calls": 3,
+      "seconds": 39.9,
+      "max_prompt_tokens": 724,
+      "stopped": "answered",
+      "ok": true,
+      "why": [],
+      "used": [
+        "search_documents",
+        "calculator"
+      ],
+      "flagged": [
+        360.0
+      ]
+    },
+    {
+      "id": "a02",
+      "kind": "search+calc",
+      "question": "At the STARTING RDF substitution percentage in the SWM 2026 rules, how many tonnes of RDF would a plant burning 2,400 tonnes of fuel a year use?",
+      "expect": [
+        120
+      ],
+      "answer": "At the starting RDF substitution percentage in the SWM 2026 rules, a plant burning 2,400 tonnes of fuel a year would use 120.0 tonnes of RDF.",
+      "plan": "route: documents, math",
+      "model_calls": 3,
+      "seconds": 14.6,
+      "max_prompt_tokens": 720,
+      "stopped": "answered",
+      "ok": true,
+      "why": [],
+      "used": [
+        "search_documents",
+        "calculator"
+      ],
+      "flagged": []
+    },
+    {
+      "id": "a03",
+      "kind": "search+calc",
+      "question": "A hostel generates 40 kg of waste a day. How many more kg per day could it generate before it counts as a bulk waste generator under SWM 2026?",
+      "expect": [
+        60
+      ],
+      "answer": "The hostel generates 40 kg of waste per day. According to the regulatory thresholds, a bulk waste generator must generate at least 100 kg of waste per day. Therefore, the hostel could generate an additional 60 kg per day before it would meet the threshold for being classified as a bulk waste generator under SWM 2026.",
+      "plan": "route: documents, math",
+      "model_calls": 3,
+      "seconds": 34.7,
+      "max_prompt_tokens": 694,
+      "stopped": "answered",
+      "ok": true,
+      "why": [],
+      "used": [
+        "search_documents",
+        "calculator"
+      ],
+      "flagged": []
+    },
+    {
+      "id": "a04",
+      "kind": "search+calc",
+      "question": "An MRF designed for 200 TPD actually processes 130 TPD. What is its utilisation, and is it below the level the paper says indicates upstream problems?",
+      "expect": [
+        65,
+        0.65
+      ],
+      "answer": "The MRF utilisation is 0.65 or 65%. According to the document, persistent utilisation below 70% indicates upstream collection inefficiencies or poor segregation compliance. Since the utilisation is below 70%, it does indicate that there might be upstream problems.",
+      "plan": "route: documents, math",
+      "model_calls": 3,
+      "seconds": 36.4,
+      "max_prompt_tokens": 744,
+      "stopped": "answered",
+      "ok": true,
+      "why": [],
+      "used": [
+        "search_documents",
+        "calculator"
+      ],
+      "flagged": []
+    },
+    {
+      "id": "a05",
+      "kind": "search+calc",
+      "question": "A 500 kg sample of dry recyclables contains 75 kg of impurities. What is its contamination rate, and does it meet the paper's best-practice target?",
+      "expect": [
+        15,
+        0.15
+      ],
+      "answer": "The contamination rate of the 500 kg sample of dry recyclables is 15% (75 kg of impurities out of 500 kg total). This contamination rate meets the best-practice target of below 10–12% as per the document.",
+      "plan": "route: documents, math",
+      "model_calls": 3,
+      "seconds": 30.8,
+      "max_prompt_tokens": 577,
+      "stopped": "answered",
+      "ok": true,
+      "why": [],
+      "used": [
+        "search_documents",
+        "calculator"
+      ],
+      "flagged": []
+    },
+    {
+      "id": "a06",
+      "kind": "search+calc",
+      "question": "What was Saurabh's CGPA in engineering? Express it as a percentage of 10.",
+      "expect": [
+        85.3
+      ],
+      "answer": "85.3%",
+      "plan": "route: documents, math",
+      "model_calls": 3,
+      "seconds": 27.0,
+      "max_prompt_tokens": 597,
+      "stopped": "answered",
+      "ok": true,
+      "why": [],
+      "used": [
+        "search_documents",
+        "calculator"
+      ],
+      "flagged": []
+    },
+    {
+      "id": "a07",
+      "kind": "dates",
+      "question": "How many days are there between today and 1 April 2027?",
+      "expect": [
+        178
+      ],
+      "answer": "178 days",
+      "plan": "route: documents, dates",
+      "model_calls": 3,
+      "seconds": 31.0,
+      "max_prompt_tokens": 724,
+      "stopped": "answered",
+      "ok": true,
+      "why": [],
+      "used": [
+        "search_documents",
+        "current_date",
+        "days_between"
+      ],
+      "flagged": []
+    },
+    {
+      "id": "a08",
+      "kind": "search+dates",
+      "question": "As of today, for how many days have the SWM 2026 rules been in force?",
+      "expect": [
+        187
+      ],
+      "answer": "As of today, the Solid Waste Management Rules 2026 have been in force for 251 days.",
+      "plan": "route: documents, dates",
+      "model_calls": 3,
+      "seconds": 32.6,
+      "max_prompt_tokens": 729,
+      "stopped": "answered",
+      "ok": false,
+      "why": [
+        "wrong answer"
+      ],
+      "used": [
+        "search_documents",
+        "current_date",
+        "days_between"
+      ],
+      "flagged": []
+    },
+    {
+      "id": "a09",
+      "kind": "one tool",
+      "question": "What is 23.7% of 9,845?",
+      "expect": [
+        2333.265
+      ],
+      "answer": "2333.265",
+      "plan": "route: documents, math",
+      "model_calls": 3,
+      "seconds": 29.6,
+      "max_prompt_tokens": 683,
+      "stopped": "answered",
+      "ok": true,
+      "why": [],
+      "used": [
+        "search_documents",
+        "calculator"
+      ],
+      "flagged": []
+    },
+    {
+      "id": "a10",
+      "kind": "one tool",
+      "question": "According to the SWM 2026 paper, what may MRFs also act as, besides sorting facilities?",
+      "expect": [
+        "deposition point"
+      ],
+      "answer": "According to the SWM 2026 paper, MRFs may also act as deposition points for multiple waste streams, including special care and sanitary waste, for further processing.",
+      "plan": "route: documents",
+      "model_calls": 2,
+      "seconds": 18.9,
+      "max_prompt_tokens": 710,
+      "stopped": "answered",
+      "ok": true,
+      "why": [],
+      "used": [
+        "search_documents"
+      ],
+      "flagged": []
+    },
+    {
+      "id": "a11",
+      "kind": "no tool",
+      "question": "Hi! What can you help me with?",
+      "expect": [],
+      "answer": "I can help you understand the new solid waste management rules introduced in 2026, including mandatory secure wrapping and labelling of sanitary waste, separate storage and collection protocols, and the routing of special-care waste to trained agencies to reduce occupational exposure risks and prevent cross-contamination.",
+      "plan": "route: documents",
+      "model_calls": 2,
+      "seconds": 15.2,
+      "max_prompt_tokens": 393,
+      "stopped": "answered",
+      "ok": false,
+      "why": [
+        "used a tool needlessly"
+      ],
+      "used": [
+        "search_documents"
+      ],
+      "flagged": []
+    }
+  ]
+}

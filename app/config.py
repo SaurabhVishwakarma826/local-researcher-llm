@@ -1,7 +1,7 @@
 # app/config.py — every tunable lives here. Measured values noted with source.
 
 OLLAMA_HOST = "http://localhost:11434"
-LLM_MODEL = "qwen2.5:3b"
+LLM_MODEL = "qwen2.5:7b"
 
 # Measured: 03_threads.py — 12 best prefill (66 tok/s), decode flat 10-12
 NUM_THREAD = 12
@@ -102,3 +102,7 @@ AGENT_MAX_TOKENS = 300        # answer length per model call
 AGENT_RESULT_MAX_CHARS = 4000 # longer tool results are cut, so one search can't flood num_ctx
 
 TOOL_RETRIES = 2   # 6.2: temporary tool failures are retried by our code before the model hears
+
+# Workflow (6.2 option B). The router said "math only" for 5 document questions, so facts
+# came from memory. Searching needlessly costs ~0.3 s; skipping a needed search does not.
+WORKFLOW_ALWAYS_RETRIEVE = True

@@ -1,0 +1,259 @@
+{
+  "timestamp": "20261004_232010",
+  "kind": "agent",
+  "mode": "plan",
+  "label": "",
+  "today": "2026-10-04",
+  "summary": {
+    "correct": 4,
+    "n": 11,
+    "wrong_order": 5,
+    "wrong_answer": 5,
+    "flagged_answers": 3,
+    "mean_calls": 2.5,
+    "mean_seconds": 18.0
+  },
+  "per_case": [
+    {
+      "id": "a01",
+      "kind": "search+calc",
+      "question": "What RDF substitution percentage do the SWM 2026 rules finally reach? If a cement plant burns 2,400 tonnes of fuel a year, how many tonnes would be RDF at that level?",
+      "expect": [
+        360
+      ],
+      "answer": "No tools needed.\n\nThe SWM 2026 rules do not specify a final RDF substitution percentage. For the cement plant burning 2,400 tonnes of fuel a year, the amount of RDF would be 2,400 tonnes, as RDF (Refuse Derived Fuel) is the fuel produced from waste. The percentage of RDF substitution is not provided in the given information.",
+      "plan": "No tools needed.",
+      "model_calls": 2,
+      "seconds": 22.7,
+      "max_prompt_tokens": 464,
+      "stopped": "answered",
+      "ok": false,
+      "why": [
+        "wrong answer",
+        "missing tool",
+        "wrong order"
+      ],
+      "used": [],
+      "flagged": []
+    },
+    {
+      "id": "a02",
+      "kind": "search+calc",
+      "question": "At the STARTING RDF substitution percentage in the SWM 2026 rules, how many tonnes of RDF would a plant burning 2,400 tonnes of fuel a year use?",
+      "expect": [
+        120
+      ],
+      "answer": "No tools are needed for this query.",
+      "plan": "No tools needed.",
+      "model_calls": 2,
+      "seconds": 8.9,
+      "max_prompt_tokens": 460,
+      "stopped": "answered",
+      "ok": false,
+      "why": [
+        "wrong answer",
+        "missing tool",
+        "wrong order"
+      ],
+      "used": [],
+      "flagged": []
+    },
+    {
+      "id": "a03",
+      "kind": "search+calc",
+      "question": "A hostel generates 40 kg of waste a day. How many more kg per day could it generate before it counts as a bulk waste generator under SWM 2026?",
+      "expect": [
+        60
+      ],
+      "answer": "No tools are needed for this calculation.",
+      "plan": "No tools needed.",
+      "model_calls": 2,
+      "seconds": 8.7,
+      "max_prompt_tokens": 458,
+      "stopped": "answered",
+      "ok": false,
+      "why": [
+        "wrong answer",
+        "missing tool",
+        "wrong order"
+      ],
+      "used": [],
+      "flagged": []
+    },
+    {
+      "id": "a04",
+      "kind": "search+calc",
+      "question": "An MRF designed for 200 TPD actually processes 130 TPD. What is its utilisation, and is it below the level the paper says indicates upstream problems?",
+      "expect": [
+        65,
+        0.65
+      ],
+      "answer": "The utilisation of the MRF is 65%. According to the paper, a utilisation level below 60% may indicate upstream problems. Since the utilisation is 65%, it is not below the level that suggests upstream problems.\n\n[Warning: 60 did not come from any tool result or the question. Treat as unverified.]",
+      "plan": "No tools needed.",
+      "model_calls": 3,
+      "seconds": 22.7,
+      "max_prompt_tokens": 551,
+      "stopped": "answered",
+      "ok": false,
+      "why": [
+        "missing tool"
+      ],
+      "used": [
+        "calculator"
+      ],
+      "flagged": [
+        60.0
+      ]
+    },
+    {
+      "id": "a05",
+      "kind": "search+calc",
+      "question": "A 500 kg sample of dry recyclables contains 75 kg of impurities. What is its contamination rate, and does it meet the paper's best-practice target?",
+      "expect": [
+        15,
+        0.15
+      ],
+      "answer": "No tools are needed for this calculation. \n\nThe contamination rate is calculated by dividing the weight of impurities by the total weight of the sample and then multiplying by 100 to get a percentage. \n\nContamination rate = (75 / 500) * 100 = 15%\n\nThe paper on India's Solid Waste Management Rules 2026 does not specify a best-practice target for contamination rates, so we cannot determine if it meets a specific target based on the information provided.\n\n[Warning: 15, 100, 2026 did not come from any tool result or the question. Treat as unverified.]",
+      "plan": "No tools needed.",
+      "model_calls": 2,
+      "seconds": 17.0,
+      "max_prompt_tokens": 458,
+      "stopped": "answered",
+      "ok": false,
+      "why": [
+        "missing tool"
+      ],
+      "used": [],
+      "flagged": [
+        15.0,
+        100.0,
+        2026.0
+      ]
+    },
+    {
+      "id": "a06",
+      "kind": "search+calc",
+      "question": "What was Saurabh's CGPA in engineering? Express it as a percentage of 10.",
+      "expect": [
+        85.3
+      ],
+      "answer": "No tools are needed.",
+      "plan": "No tools needed.",
+      "model_calls": 2,
+      "seconds": 7.7,
+      "max_prompt_tokens": 441,
+      "stopped": "answered",
+      "ok": false,
+      "why": [
+        "wrong answer",
+        "missing tool",
+        "wrong order"
+      ],
+      "used": [],
+      "flagged": []
+    },
+    {
+      "id": "a07",
+      "kind": "dates",
+      "question": "How many days are there between today and 1 April 2027?",
+      "expect": [
+        179
+      ],
+      "answer": "There are 179 days between today (2026-10-04) and 1 April 2027.",
+      "plan": "1. Use current_date to get today's date.\n2. Use days_between to count the days from today's date to 1 April 2027.",
+      "model_calls": 4,
+      "seconds": 29.8,
+      "max_prompt_tokens": 573,
+      "stopped": "answered",
+      "ok": true,
+      "why": [],
+      "used": [
+        "current_date",
+        "days_between"
+      ],
+      "flagged": []
+    },
+    {
+      "id": "a08",
+      "kind": "search+dates",
+      "question": "As of today, for how many days have the SWM 2026 rules been in force?",
+      "expect": [
+        186
+      ],
+      "answer": "Based on the information provided, the SWM 2026 rules have been in force for 13 days as of the last available page from the document. However, to provide an accurate count of days in force, we would need the start date of the rules implementation. Since that information is not available in the provided document, I cannot calculate the exact number of days.",
+      "plan": "No tools needed.",
+      "model_calls": 3,
+      "seconds": 28.4,
+      "max_prompt_tokens": 951,
+      "stopped": "answered",
+      "ok": false,
+      "why": [
+        "wrong answer",
+        "missing tool",
+        "wrong order"
+      ],
+      "used": [
+        "search_documents"
+      ],
+      "flagged": []
+    },
+    {
+      "id": "a09",
+      "kind": "one tool",
+      "question": "What is 23.7% of 9,845?",
+      "expect": [
+        2333.265
+      ],
+      "answer": "23.7% of 9,845 is approximately 2333.27.\n\n[Warning: 2333.27 did not come from any tool result or the question. Treat as unverified.]",
+      "plan": "No tools needed.",
+      "model_calls": 3,
+      "seconds": 14.3,
+      "max_prompt_tokens": 494,
+      "stopped": "answered",
+      "ok": true,
+      "why": [],
+      "used": [
+        "calculator"
+      ],
+      "flagged": [
+        2333.27
+      ]
+    },
+    {
+      "id": "a10",
+      "kind": "one tool",
+      "question": "According to the SWM 2026 paper, what may MRFs also act as, besides sorting facilities?",
+      "expect": [
+        "deposition point"
+      ],
+      "answer": "According to the SWM 2026 paper, besides sorting facilities, MRFs may also act as deposition points for multiple waste streams, including special care and sanitary waste, for further processing.",
+      "plan": "No tools needed.",
+      "model_calls": 3,
+      "seconds": 29.4,
+      "max_prompt_tokens": 1102,
+      "stopped": "answered",
+      "ok": true,
+      "why": [],
+      "used": [
+        "search_documents"
+      ],
+      "flagged": []
+    },
+    {
+      "id": "a11",
+      "kind": "no tool",
+      "question": "Hi! What can you help me with?",
+      "expect": [],
+      "answer": "I can help you with various tasks. Could you please specify what you need assistance with?",
+      "plan": "No tools needed.",
+      "model_calls": 2,
+      "seconds": 8.2,
+      "max_prompt_tokens": 429,
+      "stopped": "answered",
+      "ok": true,
+      "why": [],
+      "used": [],
+      "flagged": []
+    }
+  ]
+}

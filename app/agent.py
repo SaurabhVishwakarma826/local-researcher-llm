@@ -33,17 +33,27 @@ SYSTEM = ("You are a research assistant with tools. Use a tool only when you nee
           "If a tool fails, say so instead of guessing. "
           "When you have enough information, answer the user directly and briefly.")
 
+PLAN_REQUEST = ("Before using any tools, write a short numbered plan: which tool to call, in which "
+                "order, and which earlier result each step needs. If no tool is needed, write "
+                "'No tools needed.' Do NOT answer the question yet.\n\nAvailable tools:\n{tools}")
+
+FOLLOW_PLAN = ("\n\nFollow this plan, one tool call at a time, using each result in the next step. "
+               "Skip it if the plan says no tools are needed.\n\nPlan:\n{plan}")
+
 ONE_AT_A_TIME = ("SKIPPED: call one tool at a time. Wait for the result of the first call, "
                  "then decide the next call using that result.")
 
 _NUMBER = re.compile(r"\d[\d,]*(?:\.\d+)?")
 
 
-def _numbers(text: str) -> set:
-    out = set()
-    for m in _NUMBER.findall(text):
+def _numbers(text: str) -> list:
+    """(value, decimals, is_percent) for each number: '2,333.27' -> (2333.27, 2, False)."""
+    out = []
+    for m in _NUMBER.finditer(text):
+        raw = m.group()
         try:
-            out.add(float(m.replace(",", "")))
+            pct = text[m.end():m.end() + 2].lstrip().startswith("%")
+            out.append((float(raw.replace(",", "")), len(raw.split(".")[1]) if "." in raw else 0, pct))
         except ValueError:
             pass
     return out
@@ -51,15 +61,22 @@ def _numbers(text: str) -> set:
 
 def unverified_numbers(answer: str, sources: list) -> list:
     """Numbers in the answer that appear in no source (question or successful tool result).
+    A number written to d decimals counts as verified if a source value ROUNDS to it
+    (6.2: the calculator said 2333.265, the model wrote 2333.27, and that was flagged).
     Integers below 10 are ignored (list markers, 'one tool', etc.)."""
-    known = set().union(*(_numbers(s) for s in sources)) if sources else set()
+    known = [v for src in sources for v, _, _ in _numbers(src)]
     out = []
-    for n in sorted(_numbers(answer)):
+    for n, d, pct in _numbers(answer):
         if n < 10 and n == int(n):
             continue
-        if not any(abs(n - k) <= 1e-6 * max(1.0, abs(k)) for k in known):
+        # A percentage may restate a fraction: '65%' is verified by 0.65 (6.2, a04).
+        candidates = known + ([k * 100 for k in known] if pct else [])
+        # Within half a unit of the last decimal written: 2333.27 covers 2333.265...2333.275.
+        # (Not round(): 2333.265 is stored as 2333.26499..., so round() gives 2333.26.)
+        if not any(abs(n - k) <= 0.5 * 10 ** -d + 1e-9 for k in candidates):
             out.append(n)
-    return out
+    return sorted(set(out))
+
 
 FINAL_NUDGE = ("You have used all available tool steps. Do not call any more tools. "
                "Answer the original question now using only the information above. "
@@ -68,7 +85,7 @@ FINAL_NUDGE = ("You have used all available tool steps. Do not call any more too
 
 @dataclass
 class Step:
-    kind: str               # "tool" | "answer"
+    kind: str               # "plan" | "tool" | "answer"
     name: str = ""
     args: dict = None
     result: str = ""
@@ -86,16 +103,33 @@ class AgentResult:
     seconds: float = 0.0
     max_prompt_tokens: int = 0
     unverified: list = field(default_factory=list)   # numbers with no tool/question source
+    plan: str = ""                                   # plan-then-execute only
 
 
-def run(question: str, registry: dict = None, max_steps: int = None, on_step=None) -> AgentResult:
+def run(question: str, registry: dict = None, max_steps: int = None, on_step=None,
+        plan: bool = False) -> AgentResult:
+    """plan=True: plan-then-execute. One extra model call, WITHOUT tools, writes the steps
+    first; the loop then follows them (6.2: the plain loop called the calculator with an
+    invented 50% before searching for the real 15%)."""
     registry = registry if registry is not None else REGISTRY
     max_steps = max_steps or config.AGENT_MAX_STEPS
     schemas = [t.schema for t in registry.values()]
-    msgs = [{"role": "system", "content": SYSTEM}, {"role": "user", "content": question}]
     res = AgentResult(question=question, answer="", stopped="answered")
     seen = Counter()
     t0 = time.time()
+
+    system = SYSTEM
+    if plan:
+        tool_list = "\n".join(f"- {n}: {t.schema['function']['description']}" for n, t in registry.items())
+        m, s = llm.chat_message([{"role": "system", "content": SYSTEM},
+                                 {"role": "user", "content": f"{question}\n\n" + PLAN_REQUEST.format(tools=tool_list)}],
+                                num_predict=config.AGENT_MAX_TOKENS)
+        res.model_calls += 1
+        res.plan = (m.get("content") or "").strip()
+        system = SYSTEM + FOLLOW_PLAN.format(plan=res.plan)
+        if on_step:
+            on_step(Step("plan", result=res.plan, seconds=s["total_s"], prompt_tokens=s["prompt_tokens"]))
+    msgs = [{"role": "system", "content": system}, {"role": "user", "content": question}]
 
     def call(with_tools: bool, extra=None):
         m, s = llm.chat_message(msgs + (extra or []), tools=schemas if with_tools else None,
@@ -155,7 +189,9 @@ def run(question: str, registry: dict = None, max_steps: int = None, on_step=Non
 
 
 def print_step(step: Step):
-    if step.kind == "tool":
+    if step.kind == "plan":
+        print(f"  [{step.seconds:4.1f}s, {step.prompt_tokens} tok]  PLAN: {step.result[:300]!r}")
+    elif step.kind == "tool":
         r = step.result.replace("\n", " ")
         print(f"  [{step.seconds:4.1f}s, {step.prompt_tokens} tok]  -> {step.name}({step.args})")
         print(f"                     observed: {r[:160]!r}{'...' if len(r) > 160 else ''}")
@@ -165,10 +201,10 @@ def print_step(step: Step):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        sys.exit('Usage: python -m app.agent "your question"')
+        sys.exit('Usage: python -m app.agent "your question" [--plan]')
     if not llm.is_up():
         sys.exit("Ollama is not running. Start it with: ollama serve")
-    r = run(sys.argv[1], on_step=print_step)
+    r = run(sys.argv[1], on_step=print_step, plan="--plan" in sys.argv)
     print(f"\n{r.stopped}: {r.model_calls} model call(s), {r.seconds:.1f}s, "
           f"largest prompt {r.max_prompt_tokens} tokens")
     if r.unverified:

@@ -1,0 +1,278 @@
+{
+  "timestamp": "20261005_132716",
+  "kind": "agent",
+  "mode": "loop",
+  "label": "wf",
+  "today": "2026-10-05",
+  "summary": {
+    "correct": 4,
+    "n": 11,
+    "wrong_order": 6,
+    "wrong_answer": 5,
+    "flagged_answers": 6,
+    "mean_calls": 2.3,
+    "mean_seconds": 26.0
+  },
+  "per_case": [
+    {
+      "id": "a01",
+      "kind": "search+calc",
+      "question": "What RDF substitution percentage do the SWM 2026 rules finally reach? If a cement plant burns 2,400 tonnes of fuel a year, how many tonnes would be RDF at that level?",
+      "expect": [
+        360
+      ],
+      "answer": "Based on the information provided in the document, the SWM 2026 rules require industrial users, including cement plants, to progressively substitute conventional fuel with RDF. The substitution target is 15% over six years. \n\nHowever, without knowing the specific RDF substitution ratio for cement plants, we cannot determine the exact amount of RDF used if a cement plant burns 2,400 tonnes of fuel a year. The substitution percentage is a general requirement, not a specific tonnage.\n\nTo calculate the RDF tonnage, we would need to know the specific RDF substitution ratio for cement plants. If you have this information, please provide it, and I can perform the calculation. Otherwise, we can only state that the substitution percentage is 15%, but the exact RDF tonnage cannot be determined from the given information.",
+      "plan": "",
+      "model_calls": 2,
+      "seconds": 44.6,
+      "max_prompt_tokens": 1257,
+      "stopped": "answered",
+      "ok": false,
+      "why": [
+        "wrong answer",
+        "missing tool",
+        "wrong order"
+      ],
+      "used": [
+        "search_documents"
+      ],
+      "flagged": []
+    },
+    {
+      "id": "a02",
+      "kind": "search+calc",
+      "question": "At the STARTING RDF substitution percentage in the SWM 2026 rules, how many tonnes of RDF would a plant burning 2,400 tonnes of fuel a year use?",
+      "expect": [
+        120
+      ],
+      "answer": "Based on the information provided from the document, the starting RDF substitution percentage in the SWM 2026 rules is 5%. If a plant is burning 2,400 tonnes of fuel a year, and the substitution target is 5%, we can calculate the amount of RDF used as follows:\n\nRDF used = 2,400 tonnes * 5% = 2,400 * 0.05 = 120 tonnes\n\nTherefore, a plant burning 2,400 tonnes of fuel a year would use 120 tonnes of RDF if the substitution target is 5%.\n\n[Warning: 0.05, 120 did not come from any tool result or the question. Treat as unverified.]",
+      "plan": "",
+      "model_calls": 2,
+      "seconds": 27.9,
+      "max_prompt_tokens": 1100,
+      "stopped": "answered",
+      "ok": false,
+      "why": [
+        "missing tool",
+        "wrong order"
+      ],
+      "used": [
+        "search_documents"
+      ],
+      "flagged": [
+        0.05,
+        120.0
+      ]
+    },
+    {
+      "id": "a03",
+      "kind": "search+calc",
+      "question": "A hostel generates 40 kg of waste a day. How many more kg per day could it generate before it counts as a bulk waste generator under SWM 2026?",
+      "expect": [
+        60
+      ],
+      "answer": "The Solid Waste Management Rules 2026 (SWM 2026) define bulk waste generators (EBWGR) as those who generate more than 1 tonne of waste per day. Given that the hostel generates 40 kg of waste per day, it could generate up to 1000 kg (1 tonne) more per day before it counts as a bulk waste generator under SWM 2026.\n\n[Warning: 1000 did not come from any tool result or the question. Treat as unverified.]",
+      "plan": "",
+      "model_calls": 3,
+      "seconds": 38.5,
+      "max_prompt_tokens": 1565,
+      "stopped": "answered",
+      "ok": false,
+      "why": [
+        "wrong answer",
+        "missing tool",
+        "wrong order"
+      ],
+      "used": [
+        "search_documents",
+        "search_documents"
+      ],
+      "flagged": [
+        1000.0
+      ]
+    },
+    {
+      "id": "a04",
+      "kind": "search+calc",
+      "question": "An MRF designed for 200 TPD actually processes 130 TPD. What is its utilisation, and is it below the level the paper says indicates upstream problems?",
+      "expect": [
+        65,
+        0.65
+      ],
+      "answer": "The utilisation of the MRF, which is designed for 200 TPD but processes 130 TPD, is 65%. According to the paper on India's Solid Waste Management Rules 2026, utilisation below 70% might indicate upstream problems. Since the utilisation is below 70%, it does suggest that there might be some upstream issues that need to be addressed. Please note that this is a general guideline and actual conditions could vary. Would you like to look up more details about the paper's recommendations on utilisation levels?\n\n[Warning: 70 did not come from any tool result or the question. Treat as unverified.]",
+      "plan": "",
+      "model_calls": 3,
+      "seconds": 21.2,
+      "max_prompt_tokens": 534,
+      "stopped": "answered",
+      "ok": false,
+      "why": [
+        "missing tool"
+      ],
+      "used": [
+        "current_date",
+        "calculator"
+      ],
+      "flagged": [
+        70.0
+      ]
+    },
+    {
+      "id": "a05",
+      "kind": "search+calc",
+      "question": "A 500 kg sample of dry recyclables contains 75 kg of impurities. What is its contamination rate, and does it meet the paper's best-practice target?",
+      "expect": [
+        15,
+        0.15
+      ],
+      "answer": "The contamination rate of the 500 kg sample of dry recyclables containing 75 kg of impurities is 15.0%. According to the Solid Waste Management Rules 2026, the best-practice target for contamination rate is not explicitly stated in the provided documents. However, the rules emphasize the importance of transparent disclosure of landfill and remediation audit results, which suggests that the contamination rate should be kept to a minimum to ensure environmental sustainability. Given the 15.0% contamination rate, it seems that the sample does not meet the best-practice target as defined by these rules.",
+      "plan": "",
+      "model_calls": 4,
+      "seconds": 65.2,
+      "max_prompt_tokens": 2000,
+      "stopped": "answered",
+      "ok": true,
+      "why": [],
+      "used": [
+        "search_documents",
+        "calculator",
+        "search_documents"
+      ],
+      "flagged": []
+    },
+    {
+      "id": "a06",
+      "kind": "search+calc",
+      "question": "What was Saurabh's CGPA in engineering? Express it as a percentage of 10.",
+      "expect": [
+        85.3
+      ],
+      "answer": "Based on the information provided in Saurabh Vishwakarma's resume, his CGPA in engineering is 8.53. To calculate this as a percentage of 10, we can use the following calculation:\n\n\\[ \\text{Percentage} = \\left( \\frac{\\text{CGPA}}{10} \\right) \\times 100 \\]\n\nLet's perform this calculation.\n\n[Warning: 100 did not come from any tool result or the question. Treat as unverified.]",
+      "plan": "",
+      "model_calls": 2,
+      "seconds": 26.8,
+      "max_prompt_tokens": 1010,
+      "stopped": "answered",
+      "ok": false,
+      "why": [
+        "wrong answer",
+        "missing tool",
+        "wrong order"
+      ],
+      "used": [
+        "search_documents"
+      ],
+      "flagged": [
+        100.0
+      ]
+    },
+    {
+      "id": "a07",
+      "kind": "dates",
+      "question": "How many days are there between today and 1 April 2027?",
+      "expect": [
+        178
+      ],
+      "answer": "There are 181 days between today and April 1, 2027.\n\n[Warning: 181 did not come from any tool result or the question. Treat as unverified.]",
+      "plan": "",
+      "model_calls": 2,
+      "seconds": 9.2,
+      "max_prompt_tokens": 461,
+      "stopped": "answered",
+      "ok": false,
+      "why": [
+        "wrong answer",
+        "missing tool",
+        "wrong order"
+      ],
+      "used": [
+        "days_between"
+      ],
+      "flagged": [
+        181.0
+      ]
+    },
+    {
+      "id": "a08",
+      "kind": "search+dates",
+      "question": "As of today, for how many days have the SWM 2026 rules been in force?",
+      "expect": [
+        187
+      ],
+      "answer": "Based on the information provided, the SWM 2026 rules have been in force for 13 days as of the last update on page 13 of the document. This is inferred from the context that the document discusses the implementation and potential outcomes of the rules, suggesting a timeline for their introduction or effective date. To get an accurate count of days, we would need specific dates provided in the document.",
+      "plan": "",
+      "model_calls": 2,
+      "seconds": 19.5,
+      "max_prompt_tokens": 915,
+      "stopped": "answered",
+      "ok": false,
+      "why": [
+        "wrong answer",
+        "missing tool",
+        "wrong order"
+      ],
+      "used": [
+        "search_documents"
+      ],
+      "flagged": []
+    },
+    {
+      "id": "a09",
+      "kind": "one tool",
+      "question": "What is 23.7% of 9,845?",
+      "expect": [
+        2333.265
+      ],
+      "answer": "23.7% of 9,845 is approximately 2333.27.\n\n[Warning: 2333.27 did not come from any tool result or the question. Treat as unverified.]",
+      "plan": "",
+      "model_calls": 2,
+      "seconds": 8.8,
+      "max_prompt_tokens": 458,
+      "stopped": "answered",
+      "ok": true,
+      "why": [],
+      "used": [
+        "calculator"
+      ],
+      "flagged": [
+        2333.27
+      ]
+    },
+    {
+      "id": "a10",
+      "kind": "one tool",
+      "question": "According to the SWM 2026 paper, what may MRFs also act as, besides sorting facilities?",
+      "expect": [
+        "deposition point"
+      ],
+      "answer": "According to the Solid Waste Management Rules 2026 paper, besides sorting facilities, MRFs may also act as deposition points for multiple waste streams, including special care and sanitary waste, for further processing.",
+      "plan": "",
+      "model_calls": 2,
+      "seconds": 19.7,
+      "max_prompt_tokens": 1066,
+      "stopped": "answered",
+      "ok": true,
+      "why": [],
+      "used": [
+        "search_documents"
+      ],
+      "flagged": []
+    },
+    {
+      "id": "a11",
+      "kind": "no tool",
+      "question": "Hi! What can you help me with?",
+      "expect": [],
+      "answer": "Hello! I can help you with calculating dates, dates between events, or searching for information in your documents. How can I assist you today?",
+      "plan": "",
+      "model_calls": 1,
+      "seconds": 4.2,
+      "max_prompt_tokens": 393,
+      "stopped": "answered",
+      "ok": true,
+      "why": [],
+      "used": [],
+      "flagged": []
+    }
+  ]
+}
