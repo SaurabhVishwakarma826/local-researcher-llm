@@ -17,6 +17,7 @@ from typing import Callable
 
 from app import config, retrieve
 from app.prompt import sanitize
+from app.sandbox import run_python
 
 
 class TransientToolError(Exception):
@@ -115,6 +116,21 @@ REGISTRY = {
         {"start": {"type": "string", "description": "YYYY-MM-DD"},
          "end": {"type": "string", "description": "YYYY-MM-DD"}}, ["start", "end"]), _days_between),
 }
+
+
+PYTHON_TOOL = Tool(schema(
+    "run_python",
+    "Run a short Python 3 snippet for data analysis: statistics, loops, formatting. "
+    "Only these modules: math, statistics, datetime, decimal, fractions, itertools, "
+    "collections, re, json, random. No file, network or system access. Print the result.",
+    {"code": {"type": "string", "description": "Python code that prints its result"}},
+    ["code"]), lambda args: run_python(args["code"]))
+
+
+def with_python(registry: dict = None) -> dict:
+    """Least privilege: the Python tool is NOT in the default REGISTRY. Opt in per use.
+    It is the most dangerous tool (it runs code), and every tool costs prompt tokens."""
+    return dict(registry if registry is not None else REGISTRY, run_python=PYTHON_TOOL)
 
 
 def run_tool(registry: dict, name: str, args) -> str:

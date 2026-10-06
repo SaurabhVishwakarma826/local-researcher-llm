@@ -106,3 +106,8 @@ TOOL_RETRIES = 2   # 6.2: temporary tool failures are retried by our code before
 # Workflow (6.2 option B). The router said "math only" for 5 document questions, so facts
 # came from memory. Searching needlessly costs ~0.3 s; skipping a needed search does not.
 WORKFLOW_ALWAYS_RETRIEVE = True
+
+# Python tool (6.3). NOT a security boundary: stops accidents and naive injection only.
+PYTHON_TIMEOUT_S = 5            # layer 3: kill runaway code
+PYTHON_MAX_OUTPUT_CHARS = 2000  # layer 4: cap output
+PYTHON_TOOL_CONFIRM = True      # layer 5: show the code and ask y/N before running (interactive only)

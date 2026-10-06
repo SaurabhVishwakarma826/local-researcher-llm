@@ -201,10 +201,12 @@ def print_step(step: Step):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        sys.exit('Usage: python -m app.agent "your question" [--plan]')
+        sys.exit('Usage: python -m app.agent "your question" [--plan] [--python]')
     if not llm.is_up():
         sys.exit("Ollama is not running. Start it with: ollama serve")
-    r = run(sys.argv[1], on_step=print_step, plan="--plan" in sys.argv)
+    from app.tools import with_python
+    reg = with_python() if "--python" in sys.argv else None     # opt in: least privilege
+    r = run(sys.argv[1], registry=reg, on_step=print_step, plan="--plan" in sys.argv)
     print(f"\n{r.stopped}: {r.model_calls} model call(s), {r.seconds:.1f}s, "
           f"largest prompt {r.max_prompt_tokens} tokens")
     if r.unverified:
