@@ -111,3 +111,8 @@ WORKFLOW_ALWAYS_RETRIEVE = True
 PYTHON_TIMEOUT_S = 5            # layer 3: kill runaway code
 PYTHON_MAX_OUTPUT_CHARS = 2000  # layer 4: cap output
 PYTHON_TOOL_CONFIRM = True      # layer 5: show the code and ask y/N before running (interactive only)
+
+# Short-term memory (7.1)
+MEMORY_BUDGET_TOKENS = 4000      # system + history + new question (same as CHAT_HISTORY_BUDGET)
+MEMORY_WINDOW_TURNS = 4          # exchanges kept word for word by window / summary
+MEMORY_SUMMARY_MAX_WORDS = 120   # running summary length cap
