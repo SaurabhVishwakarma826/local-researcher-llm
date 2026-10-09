@@ -4,6 +4,7 @@ Phase 7 / Topic 7.1 — Short-term memory.
     python 18_memory.py 1                          # what does Ollama drop when a chat overflows num_ctx?
     python 18_memory.py 2                          # trim vs window vs summary on a 20-turn conversation
     python 18_memory.py 2 --model qwen2.5:3b       # same, faster (memory mechanics don't need 7B)
+    python 18_memory.py 2 --only summary,facts     # run only some strategies
 
 Needs Ollama running. Experiment 2 makes ~80 model calls: ~10 min with 3B, ~25 min with 7B.
 """
@@ -65,11 +66,11 @@ TURNS = [
     "In one sentence, what is a cement kiln?", "Give one tip for reducing dust in a plant.",
     "What does PPE stand for?", "Name one benefit of preventive maintenance.",
     "In one sentence, what is a conveyor belt used for?", "What is a good way to start a safety meeting?",
-    "Name one common cause of machine downtime.", "In one sentence, what is calorific value?",
+    "Name one common cause of machine downtime.", "By the way, our plant manager is Meena Joshi.",
     "What does KPI stand for?", "Give one tip for writing a clear email.",
     "Name one renewable energy source.", "In one sentence, what is a supply chain?",
     "What is one benefit of recycling paper?", "Give one tip for time management.",
-    "In one sentence, what is an audit?", "Name one way to reduce fuel costs.",
+    "In one sentence, what is an audit?", "Who is our plant manager?",
     "What's my name, and where is my plant?",
     "How many tonnes of fuel does our kiln burn a year?",
 ]
@@ -90,12 +91,12 @@ def run_strategy(strategy: str) -> dict:
         prompt_toks.append(s["prompt_tokens"])
         replies.append(text)
         print(f"  {strategy:<7} turn {i:>2}  {s['prompt_tokens']:>4} tok  {s['total_s']:5.1f}s"
-              + (f"   -> {text[:90]!r}" if i >= 19 else ""), flush=True)
-    a19, a20 = replies[18].lower(), replies[19]
+              + (f"   -> {text[:90]!r}" if i >= 18 else ""), flush=True)
+    a18, a19, a20 = replies[17].lower(), replies[18].lower(), replies[19]
     return {
-        "name": "ravi" in a19, "place": "pune" in a19,
+        "name": "ravi" in a19, "place": "pune" in a19, "manager": "meena" in a18,
         "fuel": bool(re.search(r"2[,\s]?400", a20)),
-        "summary_calls": mem.summary_calls, "dropped": mem.dropped,
+        "summary_calls": mem.summary_calls, "dropped": mem.dropped, "facts": mem.facts,
         "max_prompt": max(prompt_toks), "conv_seconds": sum(secs),
         "wall_seconds": time.time() - t_all, "summary": mem.summary,
     }
@@ -104,19 +105,25 @@ def run_strategy(strategy: str) -> dict:
 def exp2_strategies():
     print(f"20 turns, history budget {BUDGET} tokens, window {config.MEMORY_WINDOW_TURNS} exchanges, "
           f"model {config.LLM_MODEL}\n")
+    args = sys.argv[1:]
+    strategies = (args[args.index("--only") + 1].split(",") if "--only" in args
+                  else ["trim", "window", "summary", "facts"])
     results = {}
-    for st in ("trim", "window", "summary"):
+    for st in strategies:
         results[st] = run_strategy(st)
         print()
-    print(f"{'':<10}{'name':>6}{'Pune':>6}{'2,400':>7}{'forgot':>8}{'extra calls':>13}"
+    print(f"{'':<10}{'name':>6}{'Pune':>6}{'2,400':>7}{'Meena':>7}{'forgot':>8}{'extra calls':>13}"
           f"{'max prompt':>12}{'total time':>12}")
     for st, r in results.items():
         yn = lambda b: "yes" if b else "NO"
-        print(f"  {st:<8}{yn(r['name']):>6}{yn(r['place']):>6}{yn(r['fuel']):>7}{r['dropped']:>8}"
-              f"{r['summary_calls']:>13}{r['max_prompt']:>12}{r['wall_seconds']:>11.0f}s")
-    print(f"\nFinal running summary:\n{results['summary']['summary']}")
-    print("\nRead the summary: did it keep Ravi, Pune and 2,400 EXACTLY? A summary that says")
-    print("'a few thousand tonnes' would pass a vague check and still be wrong.")
+        print(f"  {st:<8}{yn(r['name']):>6}{yn(r['place']):>6}{yn(r['fuel']):>7}{yn(r['manager']):>7}"
+              f"{r['dropped']:>8}{r['summary_calls']:>13}{r['max_prompt']:>12}{r['wall_seconds']:>11.0f}s")
+    if "summary" in results:
+        print(f"\nFinal running summary:\n{results['summary']['summary']}")
+    if "facts" in results:
+        print("\nFinal fact memory:\n" + "\n".join(f"- {f}" for f in results["facts"]["facts"]))
+    print("\nTurn 10 states a fact in the MIDDLE (Meena). A strategy that only keeps the")
+    print("beginning now fails visibly. Read the summary/facts: are the facts EXACT?")
 
 
 if __name__ == "__main__":

@@ -1,33 +1,31 @@
 """
-chat.py — Phase 1 CLI chatbot, with exact token counting from Phase 2.
+chat.py — CLI chatbot with conversation memory (Phase 1, memory added in Phase 7.1).
 
 Run from the project root:
 
     python chat.py
 
-Commands:  /reset   /system [text]   /stats   /quit
+Commands:  /reset   /system [text]   /memory   /forget   /stats   /quit
+
+Memory strategy comes from config.MEMORY_STRATEGY (7.1: "facts" was the only strategy
+that remembered turn 2 AND turn 10 of a 20-turn conversation within budget).
 """
 
 import requests
 
 from app import config, llm, tokens
+from app.memory import Memory
 
-
-def trim(messages) -> int:
-    """Drop the oldest user+assistant pair until under budget. Never drops the system message."""
-    dropped = 0
-    while tokens.count_messages(messages) > config.CHAT_HISTORY_BUDGET and len(messages) > 3:
-        del messages[1:3]
-        dropped += 1
-    return dropped
+HELP = "Commands: /reset  /system [text]  /memory  /forget  /stats  /quit"
 
 
 def main():
     if not llm.is_up():
         raise SystemExit(f"Ollama is not running at {config.OLLAMA_HOST}. Start it with: ollama serve")
 
-    messages = [{"role": "system", "content": config.SYSTEM_PROMPT}]
-    print(f"Chatting with {config.LLM_MODEL}. Commands: /reset  /system [text]  /stats  /quit")
+    system = config.SYSTEM_PROMPT
+    mem = Memory(strategy=config.MEMORY_STRATEGY)
+    print(f"Chatting with {config.LLM_MODEL}, memory: {mem.strategy}. {HELP}")
 
     while True:
         try:
@@ -35,7 +33,6 @@ def main():
         except (EOFError, KeyboardInterrupt):
             print()
             break
-
         if not user:
             continue
 
@@ -46,44 +43,50 @@ def main():
             if cmd == "/quit":
                 break
             elif cmd == "/reset":
-                messages = messages[:1]
-                print("(history cleared, system message kept)")
+                mem = Memory(strategy=config.MEMORY_STRATEGY)
+                print("(conversation and remembered facts cleared)")
             elif cmd == "/system" and arg:
-                messages = [{"role": "system", "content": arg}]
-                print("(system message replaced, history cleared)")
+                system = arg
+                mem = Memory(strategy=config.MEMORY_STRATEGY)
+                print("(system message replaced, conversation cleared)")
             elif cmd == "/system":
-                print(f"current system message: {messages[0]['content']!r}")
+                print(f"current system message: {system!r}")
+            elif cmd == "/memory":
+                print(f"strategy {mem.strategy}: {len(mem.turns)} recent exchange(s) kept word for word")
+                if mem.facts:
+                    print("remembered facts:\n" + "\n".join(f"  - {f}" for f in mem.facts))
+                if mem.summary:
+                    print(f"summary:\n  {mem.summary}")
+                if not (mem.facts or mem.summary):
+                    print("(nothing remembered beyond the recent exchanges)")
+            elif cmd == "/forget":
+                mem.facts, mem.summary = [], ""
+                print("(remembered facts and summary cleared; recent exchanges kept)")
             elif cmd == "/stats":
-                print(f"messages: {len(messages)}   context: {tokens.count_messages(messages)} tokens "
-                      f"/ budget {config.CHAT_HISTORY_BUDGET} / num_ctx {config.NUM_CTX}")
+                msgs = mem.messages(system, "")
+                print(f"recent exchanges: {len(mem.turns)}   facts: {len(mem.facts)}   "
+                      f"context: {tokens.count_messages(msgs)} / budget {mem.budget} tokens   "
+                      f"extra memory calls so far: {mem.summary_calls}")
             else:
-                print("unknown command. Commands: /reset  /system [text]  /stats  /quit")
+                print(f"unknown command. {HELP}")
             continue
 
-        messages.append({"role": "user", "content": user})
-        dropped = trim(messages)
-        if dropped:
-            print(f"(dropped {dropped} oldest exchange(s) to stay under budget - "
-                  f"expect this turn to be slow: the prompt cache is lost)")
-
-        expected = tokens.count_messages(messages)   # counted BEFORE sending
-
+        msgs = mem.messages(system, user)
+        expected = tokens.count_messages(msgs)          # counted BEFORE sending
         print("bot > ", end="", flush=True)
         try:
-            text, s = llm.stream_chat(messages, on_token=lambda t: print(t, end="", flush=True))
+            text, s = llm.stream_chat(msgs, on_token=lambda t: print(t, end="", flush=True))
         except (requests.RequestException, RuntimeError) as e:
-            messages.pop()          # don't keep a question that never got an answer
             print(f"\n(error: {e})")
             continue
 
-        messages.append({"role": "assistant", "content": text})
+        calls_before = mem.summary_calls
+        mem.add(user, text)                             # may fold an old exchange into memory
+        note = " | memory updated" if mem.summary_calls > calls_before else ""
         print(f"\n   [prompt {s['prompt_tokens']} tokens | out {s['output_tokens']} | "
-              f"decode {s['decode_tps']:.1f} t/s | {s['total_s']:.1f}s | "
-              f"context now {tokens.count_messages(messages)}/{config.CHAT_HISTORY_BUDGET}]")
-
-        # Continuous self-check: our count before sending vs what Ollama actually read.
+              f"{s['total_s']:.1f}s | facts {len(mem.facts)}{note}]")
         if s["prompt_tokens"] != expected:
-            print(f"   ! token count mismatch: we predicted {expected}, Ollama read {s['prompt_tokens']}")
+            print(f"   ! token count mismatch: predicted {expected}, Ollama read {s['prompt_tokens']}")
         for w in s["warnings"]:
             print(f"   ! {w}")
 

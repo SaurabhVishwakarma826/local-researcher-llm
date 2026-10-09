@@ -18,7 +18,9 @@ DEFAULT_SEED = 42
 # Health check: normal prefill on this machine is ~60-70 tok/s.
 # If logged prefill drops below ~40, restart the Ollama server first
 # before debugging anything else (see the unexplained 19.6 tok/s run).
-PREFILL_TOK_S_FLOOR = 40
+# Health check: below this, suspect a degraded Ollama server. Set for the CURRENT model:
+# 3B normally prefills ~66 tok/s, 7B ~25-32 tok/s. (7.1: 40 fired constantly on 7B.)
+PREFILL_TOK_S_FLOOR = 15
 
 # Sampling presets (1.2).
 # Always set every cut-off explicitly. Ollama's defaults (top_k 40, top_p 0.9)
@@ -116,3 +118,5 @@ PYTHON_TOOL_CONFIRM = True      # layer 5: show the code and ask y/N before runn
 MEMORY_BUDGET_TOKENS = 4000      # system + history + new question (same as CHAT_HISTORY_BUDGET)
 MEMORY_WINDOW_TURNS = 4          # exchanges kept word for word by window / summary
 MEMORY_SUMMARY_MAX_WORDS = 120   # running summary length cap
+MEMORY_MAX_FACTS = 30   # fact memory cap; oldest facts drop first beyond this
+MEMORY_STRATEGY = "facts"   # 7.1: only strategy to recall turns 2 AND 10 of 20 within budget;
