@@ -120,3 +120,13 @@ MEMORY_WINDOW_TURNS = 4          # exchanges kept word for word by window / summ
 MEMORY_SUMMARY_MAX_WORDS = 120   # running summary length cap
 MEMORY_MAX_FACTS = 30   # fact memory cap; oldest facts drop first beyond this
 MEMORY_STRATEGY = "facts"   # 7.1: only strategy to recall turns 2 AND 10 of 20 within budget;
+
+# Long-term memory (7.2). Stored under data/, so it is git-ignored. Never commit it.
+LONGTERM_MEMORY_PATH = "data/memory/memory.json"
+LONGTERM_DESIGN = "verbatim"   # 7.2 (7B): verbatim 4/5, atomic 3/5. Atomic's rewrites merged
+                                  # "from Mumbai"/"works in Hyderabad" and a correction deleted NHAI.
+
+# Follow-up questions (7.3): search with the last 4 user messages joined (concat).
+# 15/15 vs model rewrite 14/15 (7.6 s/turn; it resolved "them" to an OLD topic). 2-PDF store.
+REWRITE_HISTORY_MESSAGES = 4
+FOLLOWUP_QUERY = "union"       # "concat" | "rewrite" | "raw"
